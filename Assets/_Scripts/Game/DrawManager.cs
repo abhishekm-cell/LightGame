@@ -18,6 +18,7 @@ public class DrawManager : MonoBehaviour
     void Update()
     {
         HandleDraw();
+        
     }
 
     // void HandleDraw()
@@ -65,5 +66,11 @@ public class DrawManager : MonoBehaviour
                 _currentLine?.SetPosition(touchPos);
             }
         }
+    }
+
+    public bool TouchCheck()
+    {
+        Debug.Log("touch count: " + Input.touchCount);
+        return Input.touchCount > 0;
     }
 }
