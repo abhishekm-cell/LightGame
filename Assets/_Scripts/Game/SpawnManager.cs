@@ -18,25 +18,26 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        
+        if(drawManager.TouchCheck())
+        {
+            gameStarted = true;
+            Debug.Log("instantiate light source");
+            //SpawnLightSource();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(drawManager.TouchCheck())
-        {
-            gameStarted = true;
-            SpawnLightSource();
-        }
+        
         
     }
 
 
-    void SpawnLightSource()
-    {
-        lightSource = Instantiate(lightSourcePrefab,startPointPrefab.transform.position, Quaternion.identity);   
-    }
+    // void SpawnLightSource()
+    // {
+    //     lightSource = Instantiate(lightSourcePrefab,startPointPrefab.transform.position, Quaternion.identity);   
+    // }
 
 
 }

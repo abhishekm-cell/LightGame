@@ -41,7 +41,7 @@ EdgeCollider2D:
   m_GameObject: {fileID: 5208253081645219521}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 165f72f5327614a0997714699c0c22a3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -64,7 +64,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6140229636233789756}
   - component: {fileID: 6140229636233789755}
-  - component: {fileID: 6323109574055838258}
+  - component: {fileID: 8775755825630963496}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -137,8 +137,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.058757782
-        value: 0.18504524
+        time: 0.011421204
+        value: 0.3730793
         inSlope: -0.11172351
         outSlope: -0.11172351
         tangentMode: 0
@@ -185,7 +185,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &6323109574055838258
+--- !u!114 &8775755825630963496
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,3 +199,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 6140229636233789755}
   _collider: {fileID: 2762474465598823780}
+  smoothingIterations: 5

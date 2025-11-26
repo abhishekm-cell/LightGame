@@ -6,8 +6,10 @@ public class DrawManager : MonoBehaviour
 {
     private Camera cam;
     [SerializeField] private Line linePrefab;
+    
     private Line _currentLine;
-    public const float Resolution = 0.15f;
+    
+    public const float Resolution = 0.1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,9 +17,10 @@ public class DrawManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        HandleDraw();
+        HandleDrawTouch();
+        HandleMouseDraw();
         
     }
 
@@ -35,23 +38,25 @@ public class DrawManager : MonoBehaviour
     //     }
     // }
 
-    void HandleDraw()
+    void HandleMouseDraw()
     {
-        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+        if (!Application.isEditor) return; // Only mouse in editor
 
-        // Start line on mouse click
+        Vector2 pos = cam.ScreenToWorldPoint(Input.mousePosition);
+
         if (Input.GetMouseButtonDown(0))
         {
-            _currentLine = Instantiate(linePrefab, mousePos, Quaternion.identity);
+            _currentLine = Instantiate(linePrefab, pos, Quaternion.identity);
         }
 
-        // Continue drawing while mouse held
         if (Input.GetMouseButton(0))
         {
-            _currentLine?.SetPosition(mousePos);
+            _currentLine?.SetPosition(pos);
         }
-
-        // TOUCH SUPPORT
+    }
+    
+    void HandleDrawTouch()
+    {
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
