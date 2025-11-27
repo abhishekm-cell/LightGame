@@ -8,6 +8,7 @@ public class LightSource : MonoBehaviour
     [SerializeField] private bool endPointReached = false;
 
     [SerializeField] private Transform endPoint;
+    [SerializeField] private float gravityMOD;
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -43,13 +44,13 @@ public class LightSource : MonoBehaviour
     {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            rb.gravityScale = 1;
+            rb.gravityScale = gravityMOD;
         }
 
         // For testing in Unity Editor with mouse
         if (Input.GetMouseButtonDown(0))
         {
-            rb.gravityScale = 1;
+            rb.gravityScale = gravityMOD;
         }   
     }
 
