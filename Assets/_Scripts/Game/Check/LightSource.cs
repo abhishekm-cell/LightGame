@@ -6,9 +6,10 @@ public class LightSource : MonoBehaviour
 {
     [SerializeField] private LayerMask endPointlayerMask ;
     [SerializeField] private bool endPointReached = false;
-
     [SerializeField] private Transform endPoint;
     [SerializeField] private float gravityMOD;
+    [SerializeField] private float speedBoost;
+    [SerializeField] private GameManager gameManager;
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -25,21 +26,17 @@ public class LightSource : MonoBehaviour
         if(endPointReached)
         {
             transform.position = endPoint.position;
+            gameManager.levelCleared = true;
         }
     }
-
-    
-
     
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("EndPoint"))
         {
             endPointReached = true;
-            
         }
     }
-
     void LightSourceMove()
     {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
@@ -47,7 +44,6 @@ public class LightSource : MonoBehaviour
             rb.gravityScale = gravityMOD;
         }
 
-        // For testing in Unity Editor with mouse
         if (Input.GetMouseButtonDown(0))
         {
             rb.gravityScale = gravityMOD;

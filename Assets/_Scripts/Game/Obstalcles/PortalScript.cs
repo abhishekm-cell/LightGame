@@ -4,56 +4,45 @@ using UnityEngine;
 
 public class PortalScript : MonoBehaviour
 {
-    [SerializeField] private GameObject target;      // object that teleports
-    [SerializeField] private GameObject portalIn;    // entry portal
-    [SerializeField] private GameObject portalOut;   // exit portal
-    [SerializeField] private Vector2 direction;      // direction after exit
-    [SerializeField] private int outForce;
-    [SerializeField] private Vector2 savedVelocity;
-    [SerializeField] private Vector2 contactLocalPos;
-    [SerializeField] private float offsetExit;
+    [Header("Portal Setup")]
+    [SerializeField] private GameObject portalOut;   
+    [Header("Exit Settings")]
+    [SerializeField] private float exitOffset = 0.5f; 
+    [SerializeField] private float velocityMultiplier = 1f; 
+    private Vector2 savedVelocity;
+    private Vector2 contactLocalPos;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        // only react to the target (or LightSource layer as you want)
-        if (collision.gameObject == target)
-        {
-            TeleportIn();
-        }
-    }
-
-    public void TeleportIn()
-    {
-        
-                                    
-
-        Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
+        Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            savedVelocity = rb.velocity;
+            TeleportObject(collision.gameObject, rb);
         }
-
-        contactLocalPos = portalIn.transform.InverseTransformPoint(target.transform.position);
-        //direction = portalIn.transform.position - target.transform.position;
-        TeleportOut();
     }
 
-    void TeleportOut()
+    private void TeleportObject(GameObject obj, Rigidbody2D rb)
+    {
+        
+        savedVelocity = rb.velocity;
+        
+        contactLocalPos = transform.InverseTransformPoint(obj.transform.position);
+        
+        TeleportToExit(obj, rb);
+    }
+
+    private void TeleportToExit(GameObject obj, Rigidbody2D rb)
     {
         
         Vector2 exitPos = portalOut.transform.TransformPoint(contactLocalPos);
-        Vector2 newExitPos =new Vector2( exitPos.x + offsetExit,exitPos.y + offsetExit) ;
+        
+        Vector2 newExitPos =new Vector2( exitPos.x + exitOffset,exitPos.y + exitOffset) ;
 
-        target.transform.position = newExitPos;
-        //target.transform.rotation = portalOut.transform.rotation;
-
-
-        // OPTIONAL → if target has RB, apply force
-        Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            //savedVelocity = rb.velocity;
-            rb.velocity =  portalOut.transform.rotation * savedVelocity * outForce ;
-        }
-    }   
-}
+        Vector2 finalExitPos = newExitPos; 
+        
+        obj.transform.position = finalExitPos;
+        
+        Vector2 rotatedVelocity = portalOut.transform.rotation * savedVelocity;
+        rb.velocity = rotatedVelocity * velocityMultiplier;
+    }
+} 

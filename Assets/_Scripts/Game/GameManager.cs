@@ -1,9 +1,17 @@
+using Unity.VisualScripting;
 using UnityEngine;
+
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private SpawnManager spawnManager;
-    public bool gamestarted = false;    
+    [SerializeField] private GameObject floor;
+    [SerializeField] private Transform startPT;
+    [SerializeField] private GameObject target;
+    public bool gameOver { get; private set; }
+    public bool gamestarted = false;  
+    public bool levelCleared = false;
+
 
     /*
         Game will start / be inplay when there are no ui panels active, if panels are active game will be in pause state
@@ -15,5 +23,20 @@ public class GameManager : MonoBehaviour
     */
 
 
-    
+    public void RestartLevel()
+    {
+        Debug.Log("restarting level69");
+        if(gameOver)
+        {
+            spawnManager.SpawnLightSource();
+            Debug.Log("restarting level");
+            
+        }
+    }
+
+    public void SetGameOver()
+    {
+        gameOver = true;
+    }
+
 }

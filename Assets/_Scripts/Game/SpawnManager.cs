@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject startPointPrefab;
     [SerializeField] private bool gameStarted = false;
     [SerializeField] private DrawManager drawManager;
-    private GameObject lightSource;
+  
 
     void Start()
     {
@@ -34,10 +34,11 @@ public class SpawnManager : MonoBehaviour
     }
 
 
-    // void SpawnLightSource()
-    // {
-    //     lightSource = Instantiate(lightSourcePrefab,startPointPrefab.transform.position, Quaternion.identity);   
-    // }
+    public void SpawnLightSource()
+    {
+        lightSourcePrefab = Instantiate(lightSourcePrefab,startPointPrefab.transform.position, Quaternion.identity); 
+          
+    }
 
 
 }
