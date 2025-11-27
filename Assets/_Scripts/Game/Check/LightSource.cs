@@ -5,8 +5,6 @@ using UnityEngine;
 public class LightSource : MonoBehaviour
 {
     [SerializeField] private LayerMask endPointlayerMask ;
-    [SerializeField] private bool endPointReached = false;
-    [SerializeField] private Transform endPoint;
     [SerializeField] private float gravityMOD;
     [SerializeField] private float speedBoost;
     [SerializeField] private GameManager gameManager;
@@ -16,17 +14,22 @@ public class LightSource : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
-        endPointReached = false;
+        
+    }
+
+    public void SetGameManager(GameManager manager)
+    {
+        gameManager = manager;
     }
 
     // Update is called once per frame
     void Update()
     {
         LightSourceMove();
-        if(endPointReached)
+        if(gameManager.levelCleared)
         {
-            transform.position = endPoint.position;
-            gameManager.levelCleared = true;
+            gameManager.LevelClearCheck();
+           
         }
     }
     
@@ -34,7 +37,7 @@ public class LightSource : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("EndPoint"))
         {
-            endPointReached = true;
+            gameManager.levelCleared = true;
         }
     }
     void LightSourceMove()

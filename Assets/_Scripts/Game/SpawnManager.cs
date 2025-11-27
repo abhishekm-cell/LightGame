@@ -14,6 +14,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject startPointPrefab;
     [SerializeField] private bool gameStarted = false;
     [SerializeField] private DrawManager drawManager;
+    [SerializeField] private GameManager gameManager;
   
 
     void Start()
@@ -26,19 +27,24 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-        
-    }
-
+    // Update is called once per fram
 
     public void SpawnLightSource()
     {
-        lightSourcePrefab = Instantiate(lightSourcePrefab,startPointPrefab.transform.position, Quaternion.identity); 
-          
+        // Spawn new light source
+        GameObject newLightSource = Instantiate(lightSourcePrefab, startPointPrefab.transform.position, Quaternion.identity);
+        
+        // Set up the light source
+        newLightSource.GetComponent<LightSource>().SetGameManager(gameManager);
+        
+        // IMPORTANT: Update GameManager's reference
+        gameManager.UpdateTargetReference(newLightSource);
     }
+    // public void SpawnLightSource()
+    // {
+    //     lightSourcePrefab = Instantiate(lightSourcePrefab,startPointPrefab.transform.position, Quaternion.identity); 
+    //     lightSourcePrefab.GetComponent<LightSource>().SetGameManager(gameManager);
+    // }
 
 
 }

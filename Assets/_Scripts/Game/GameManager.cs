@@ -8,10 +8,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject floor;
     [SerializeField] private Transform startPT;
     [SerializeField] private GameObject target;
+    [SerializeField] private GameObject endpoint;
     public bool gameOver { get; private set; }
     public bool gamestarted = false;  
     public bool levelCleared = false;
 
+
+    public void UpdateTargetReference(GameObject newTarget)
+    {
+        target = newTarget;
+        Debug.Log("Target reference updated!");
+    }
 
     /*
         Game will start / be inplay when there are no ui panels active, if panels are active game will be in pause state
@@ -37,6 +44,18 @@ public class GameManager : MonoBehaviour
     public void SetGameOver()
     {
         gameOver = true;
+    }
+
+    public void LevelClearCheck()
+    {
+        if (target != null)
+        {
+            target.transform.position = endpoint.transform.position;
+        }
+        else
+        {
+            Debug.LogWarning("Target is null! Was it destroyed or not spawned yet?");
+        }
     }
 
 }
