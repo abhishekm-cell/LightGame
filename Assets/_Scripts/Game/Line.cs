@@ -6,10 +6,10 @@ public class Line : MonoBehaviour
     [SerializeField] private LineRenderer _renderer;
     [SerializeField] private EdgeCollider2D _collider;
 
-    private List<Vector2> rawPoints = new List<Vector2>();      // Raw input points
-    private List<Vector2> smoothPoints = new List<Vector2>();   // Smoothed points
+    private List<Vector2> rawPoints = new List<Vector2>();      
+    private List<Vector2> smoothPoints = new List<Vector2>();   
 
-    [SerializeField] private int smoothingIterations = 2;   // You can increase to 3 or 4 for extra smoothness
+    [SerializeField] private int smoothingIterations = 2;   
 
     void Start()
     {
@@ -50,9 +50,6 @@ public class Line : MonoBehaviour
         _collider.points = smoothPoints.ToArray();
     }
 
-    // ------------------------
-    //     CHAIKIN SMOOTHING
-    // ------------------------
     private List<Vector2> ChaikinSmooth(List<Vector2> points, int iterations)
     {
         if (points.Count < 3) return new List<Vector2>(points);
@@ -62,7 +59,7 @@ public class Line : MonoBehaviour
         for (int iter = 0; iter < iterations; iter++)
         {
             List<Vector2> newPoints = new List<Vector2>();
-            newPoints.Add(result[0]); // Keep first point
+            newPoints.Add(result[0]); 
 
             for (int i = 0; i < result.Count - 1; i++)
             {
@@ -79,7 +76,7 @@ public class Line : MonoBehaviour
                 newPoints.Add(R);
             }
 
-            newPoints.Add(result[result.Count - 1]); // Keep last point
+            newPoints.Add(result[result.Count - 1]); 
             result = newPoints;
         }
 

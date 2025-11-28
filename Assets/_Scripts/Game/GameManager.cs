@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private SpawnManager spawnManager;
+    [SerializeField] private DrawManager drawManager;   
     [SerializeField] private GameObject floor;
     [SerializeField] private Transform startPT;
     [SerializeField] private GameObject target;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
         {
             spawnManager.SpawnLightSource();
             Debug.Log("restarting level");
+            drawManager.ClearAllLines();
             
         }
     }
