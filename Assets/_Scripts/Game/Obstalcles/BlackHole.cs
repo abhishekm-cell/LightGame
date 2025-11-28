@@ -7,7 +7,9 @@ public class BlackHole : MonoBehaviour
     [SerializeField] private CircleCollider2D _collider;
     [SerializeField] private float moveSpeedToCentre;
     [SerializeField] private bool isMovingToCentre = false;
-    [SerializeField] private float stickDistance = 0.1f; // How close before it "sticks"
+    [SerializeField] private float stickDistance = 0.1f; 
+    [SerializeField] private GameManager gameManager;
+    private Rigidbody2D targetRb;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,7 +18,15 @@ public class BlackHole : MonoBehaviour
         {
             Debug.Log("Starting move to centre");
             target = collision.gameObject;
+            targetRb = target.GetComponent<Rigidbody2D>();
+            if (targetRb != null)
+            {
+                targetRb.gravityScale = 0;
+                targetRb.velocity = Vector2.zero; 
+            }
+            
             isMovingToCentre = true;
+            gameManager.SetGameOver();
         }
     }
 
@@ -43,18 +53,9 @@ public class BlackHole : MonoBehaviour
         {
             target.transform.position = colliderCenter;
             isMovingToCentre = false;
-            
-            // Optional: Disable physics so it stays stuck
-            Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                rb.velocity = Vector2.zero;
-                rb.isKinematic = true; // Makes it not affected by physics
-            }
         }
         else
         {
-            // Keep moving toward center
             target.transform.position = Vector2.MoveTowards(target.transform.position, colliderCenter, moveSpeedToCentre * Time.deltaTime);
         }
     }

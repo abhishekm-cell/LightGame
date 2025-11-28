@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform startPT;
     [SerializeField] private GameObject target;
     [SerializeField] private GameObject endpoint;
+    [SerializeField] private BlackHole blackHole;
     public bool gameOver { get; private set; }
     public bool gamestarted = false;  
     public bool levelCleared = false;
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     public void UpdateTargetReference(GameObject newTarget)
     {
         target = newTarget;
+        blackHole.UpdateTarget(newTarget);
         Debug.Log("Target reference updated!");
     }
 
