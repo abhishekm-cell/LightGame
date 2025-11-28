@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LightSource : MonoBehaviour
 {
-    [SerializeField] private LayerMask endPointlayerMask ;
+
     [SerializeField] private float gravityMOD;
     [SerializeField] private float speedBoost;
     [SerializeField] private GameManager gameManager;
@@ -16,7 +16,6 @@ public class LightSource : MonoBehaviour
         rb.gravityScale = 0;
         
     }
-
     public void SetGameManager(GameManager manager)
     {
         gameManager = manager;
@@ -35,9 +34,15 @@ public class LightSource : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("EndPoint"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("EndPoint")) //LayerMask.NameToLayer("EndPoint")
         {
             gameManager.levelCleared = true;
+        }
+
+        if(collision.gameObject.layer == LayerMask.NameToLayer("SpeedBoost"))
+        {
+            Debug.Log("speed boost");
+            rb.velocity *= speedBoost;
         }
     }
     void LightSourceMove()
@@ -52,6 +57,4 @@ public class LightSource : MonoBehaviour
             rb.gravityScale = gravityMOD;
         }   
     }
-
-    
 }

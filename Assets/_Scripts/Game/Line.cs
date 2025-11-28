@@ -18,7 +18,7 @@ public class Line : MonoBehaviour
 
     public void SetPosition(Vector2 pos)
     {
-        // First point
+        
         if (rawPoints.Count == 0)
         {
             rawPoints.Add(pos);
@@ -26,7 +26,7 @@ public class Line : MonoBehaviour
             return;
         }
 
-        // Add only if far enough
+        
         if (Vector2.Distance(rawPoints[rawPoints.Count - 1], pos) < DrawManager.Resolution)
             return;
 
@@ -38,15 +38,13 @@ public class Line : MonoBehaviour
     {
         smoothPoints = ChaikinSmooth(rawPoints, smoothingIterations);
 
-        // Update line renderer
+        
         _renderer.positionCount = smoothPoints.Count;
         for (int i = 0; i < smoothPoints.Count; i++)
         {
             _renderer.SetPosition(i, smoothPoints[i]);
         }
-
-        Debug.Log("smooth points: " + smoothPoints.Count);
-        // Update edge collider
+        
         _collider.points = smoothPoints.ToArray();
     }
 

@@ -14,9 +14,11 @@ public class PortalScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("teleport trigger");
         Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
+            Debug.Log("teleporting: " + collision.gameObject.name);
             TeleportObject(collision.gameObject, rb);
         }
     }

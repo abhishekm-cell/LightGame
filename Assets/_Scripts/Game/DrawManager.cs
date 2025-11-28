@@ -12,7 +12,7 @@ public class DrawManager : MonoBehaviour
     public Line _currentLine {get; set;}
     
     public const float Resolution = 0.1f;
-    // Start is called before the first frame update
+    
     void Start()
     {
         cam = Camera.main;
@@ -26,19 +26,6 @@ public class DrawManager : MonoBehaviour
         
     }
 
-    // void HandleDraw()
-    // {
-    //     Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-    //     if (Input.GetMouseButtonDown(0) || Input.GetTouch(0).phase == TouchPhase.Began)
-    //     {
-    //         _currentLine = Instantiate(linePrefab, mousePos, Quaternion.identity);
-            
-    //     }
-    //     if(Input.GetMouseButton(0) || Input.GetTouch(0).phase == TouchPhase.Began)
-    //     {
-    //         _currentLine.SetPosition(mousePos);
-    //     }
-    // }
 
     void HandleMouseDraw()
     {
@@ -90,7 +77,6 @@ public class DrawManager : MonoBehaviour
 
     public bool TouchCheck()
     {
-        Debug.Log("touch count: " + Input.touchCount);
         return Input.touchCount > 0;
     }
 }
