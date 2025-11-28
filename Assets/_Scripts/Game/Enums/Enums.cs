@@ -1,9 +1,15 @@
 public enum ObstacleType
 {
-    RotationTriangle,
+    RotationPortal,
     SpringPad,
+    BlackHole,
+    SpeedBoost,
+
+}
+
+public enum PlatformType
+{
     Platform,
     RotatingPlatform,
-
 }
 
