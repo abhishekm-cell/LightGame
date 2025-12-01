@@ -28,8 +28,6 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    // Update is called once per fram
-
     public void SpawnLightSource()
     {
         

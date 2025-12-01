@@ -6,8 +6,16 @@ public class LevelData : ScriptableObject
 {
     [Header ("LightSource & Spawn point, EndPoint")]
     public Transform lightSource;
-    public Transform spawnPoint;
+    public Transform startPoint;
     public Transform endPoint;
+
+    [Header("Start and End point spawn positions")]
+    public Vector2 startPointPosition;
+    public Vector2 endPointPosition;
+
+   [Header("Level Bounds" + "/Cam Bounds")]
+    
+
 
     [Header("Platforms")]
     public List<PlatformData>platforms = new List<PlatformData>();

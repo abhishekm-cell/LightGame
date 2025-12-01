@@ -11,17 +11,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject target;
     [SerializeField] private GameObject endpoint;
     [SerializeField] private BlackHole blackHole;
+    [SerializeField] private LevelManager levelManager;
     public bool gameOver { get; private set; }
     public bool gamestarted = false;  
     public bool levelCleared = false;
+
+    //public event System.Action GameOver;
 
 
     public void UpdateTargetReference(GameObject newTarget)
     {
         target = newTarget;
-        blackHole.UpdateTarget(newTarget);
-        Debug.Log("Target reference updated!");
-    }
+        if(blackHole != null)
+        {
+            blackHole.UpdateTarget(newTarget);
+            Debug.Log("Target reference updated!");
+        }
+    }  
+        
 
     /*
         Game will start / be inplay when there are no ui panels active, if panels are active game will be in pause state
@@ -33,27 +40,18 @@ public class GameManager : MonoBehaviour
     */
 
 
-    public void RestartLevel()
-    {
-        Debug.Log("restarting level69");
-        if(gameOver)
-        {
-            spawnManager.SpawnLightSource();
-            Debug.Log("restarting level");
-            drawManager.ClearAllLines();
-            
-        }
-    }
-
     public void SetGameOver()
     {
         gameOver = true;
+        levelManager.RestartLevel();
+        Debug.Log("Game over"); 
     }
 
     public void LevelClearCheck()
     {
         if (target != null)
         {
+            Debug.Log("Level cleared now!!!!!!!!!!");
             target.transform.position = endpoint.transform.position;
         }
         else
@@ -61,5 +59,4 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Target is null! Was it destroyed or not spawned yet?");
         }
     }
-
 }

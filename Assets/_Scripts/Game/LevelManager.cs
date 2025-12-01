@@ -5,6 +5,7 @@ public class LevelManager : MonoBehaviour
 {
     [Header("Prefab References")]
     public GameObject lightSourcePrefab; // The ball that spawns at startPt
+    public GameObject startPointPrefab;
     public GameObject endPointPrefab; // The goal/end point
     public GameObject platformPrefab; // For creating static platforms
     public GameObject[] obstaclePrefabs; // Index matches ObstacleType enum
@@ -13,14 +14,18 @@ public class LevelManager : MonoBehaviour
     public LevelData currentLevel;
     
     [Header("Runtime References")]
+    
+    private GameObject startPointInstance;
     private GameObject lightSourceInstance;
     private GameObject endPointInstance;
+    
     private List<GameObject> spawnedObjects = new List<GameObject>();
     [SerializeField] private DrawManager drawingController;
+    [SerializeField] private GameManager gameManager;
     
     void Start()
     {
-        drawingController = FindObjectOfType<DrawManager>();
+        //drawingController = FindObjectOfType<DrawManager>();
         
         if (currentLevel != null)
         {
@@ -42,12 +47,15 @@ public class LevelManager : MonoBehaviour
         // Set background
         Camera.main.backgroundColor = level.backgroundColor;
         
+        startPointInstance = Instantiate(startPointPrefab, level.startPointPosition, Quaternion.identity);
+        spawnedObjects.Add(startPointInstance);
         // Spawn light source (ball) at start position
-        lightSourceInstance = Instantiate(lightSourcePrefab, level.lightSource.position, Quaternion.identity);
+        lightSourceInstance = Instantiate(lightSourcePrefab, level.startPointPosition, Quaternion.identity);
         spawnedObjects.Add(lightSourceInstance);
+        lightSourceInstance.GetComponent<LightSource>().SetGameManager(gameManager);
         
         // Spawn end point (goal)
-        endPointInstance = Instantiate(endPointPrefab, level.endPoint.position, Quaternion.identity);
+        endPointInstance = Instantiate(endPointPrefab, level.endPointPosition, Quaternion.identity);
         spawnedObjects.Add(endPointInstance);
         
         // Create static platforms from level data
@@ -71,30 +79,25 @@ public class LevelManager : MonoBehaviour
     
     void CreatePlatform(PlatformData data)
     {
+        
         GameObject platform = Instantiate(platformPrefab);
+
         
-        // Position at midpoint between start and end
-        // Vector2 midpoint = (data.startPoint + data.endPoint) / 2f;
-        // platform.transform.position = midpoint;
+        platform.transform.position = data.spawnPoint;
+
         
-        // // Calculate angle and length for the platform
-        // Vector2 direction = data.endPoint - data.startPoint;
-        // float length = direction.magnitude;
-        // float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        
-        // platform.transform.rotation = Quaternion.Euler(0, 0, angle);
-        // platform.transform.localScale = new Vector3(length, data.thickness, 1);
-        
-        // Set platform color
+        platform.transform.localScale = new Vector3(platform.transform.localScale.x,1);
+
         SpriteRenderer sr = platform.GetComponent<SpriteRenderer>();
         if (sr != null)
         {
             sr.color = data.platformColor;
         }
+
         
         spawnedObjects.Add(platform);
     }
-    
+
     void CreateObstacle(ObstacleData data)
     {
         int obstacleIndex = (int)data.type;
@@ -110,26 +113,14 @@ public class LevelManager : MonoBehaviour
         // Setup specific obstacle types based on their components
         switch (data.type)
         {
-            // case ObstacleType.RotationPortal:
-            // case ObstacleType.RotatingPlatform:
-            //     var rotatingComp = obstacle.GetComponent<RotatingObstacle>();
-            //     if (rotatingComp != null)
-            //     {
-            //         rotatingComp.rotationSpeed = data.rotationSpeed;
-            //     }
-            //     break;
-                
-            // case ObstacleType.SpringPad:
-            //     var springComp = obstacle.GetComponent<SpringPad>();
-            //     if (springComp != null)
-            //     {
-            //         springComp.springForce = data.springForce;
-            //     }
-            //     break;
-                
-            // case ObstacleType.Platform:
-            //     // Static platform, no special setup needed
-            //     break;
+            case ObstacleType.RotationPortal:
+                break;
+            case ObstacleType.BlackHole:
+                break;
+            case ObstacleType.SpringPad:
+                break;
+            case ObstacleType.SpeedBoost:
+                break;
         }
         
         spawnedObjects.Add(obstacle);

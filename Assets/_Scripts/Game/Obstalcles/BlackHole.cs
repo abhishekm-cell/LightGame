@@ -26,7 +26,7 @@ public class BlackHole : MonoBehaviour
             }
             
             isMovingToCentre = true;
-            gameManager.SetGameOver();
+            //gameManager.SetGameOver();
         }
     }
 

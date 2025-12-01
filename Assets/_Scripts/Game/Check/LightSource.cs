@@ -8,12 +8,13 @@ public class LightSource : MonoBehaviour
     [SerializeField] private float gravityMOD;
     [SerializeField] private float speedBoost;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private float camHeightY, camWidthX;
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0;
+        rb.constraints = RigidbodyConstraints2D.FreezePosition;
         
     }
     public void SetGameManager(GameManager manager)
@@ -27,9 +28,21 @@ public class LightSource : MonoBehaviour
         LightSourceMove();
         if(gameManager.levelCleared)
         {
+            Debug.Log("level cleared");
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
             gameManager.LevelClearCheck();
-           
         }
+        
+        if (transform.position.y < GetBottomBound() || transform.position.y > GetTopBound())
+        {
+            gameManager.SetGameOver();
+        }
+
+        if (transform.position.x < GetLeftBound() || transform.position.x > GetRightBound())
+        {
+            gameManager.SetGameOver();
+        }
+
     }
     
     void OnTriggerEnter2D(Collider2D collision)
@@ -47,14 +60,44 @@ public class LightSource : MonoBehaviour
     }
     void LightSourceMove()
     {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)// touch check
         {
             rb.gravityScale = gravityMOD;
+            rb.constraints = RigidbodyConstraints2D.None;
+            Debug.Log("touching");
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            rb.gravityScale = gravityMOD;
-        }   
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     rb.constraints = RigidbodyConstraints2D.None;
+        //     rb.gravityScale = gravityMOD;
+        //     Debug.Log("touching2");
+        // }   
     }
+
+    public float GetTopBound()
+    {
+        var cam = Camera.main;
+        return cam.transform.position.y + cam.orthographicSize;
+    }
+
+    public float GetBottomBound()
+    {
+        var cam = Camera.main;
+        return cam.transform.position.y - cam.orthographicSize;
+    }
+
+    public float GetRightBound()
+    {
+        var cam = Camera.main;
+        return cam.transform.position.x + cam.orthographicSize * cam.aspect;
+    }
+
+    public float GetLeftBound()
+    {
+        var cam = Camera.main;
+        return cam.transform.position.x - cam.orthographicSize * cam.aspect;
+    }
+
+    
 }

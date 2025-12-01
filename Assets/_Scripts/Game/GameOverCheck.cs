@@ -8,7 +8,7 @@ public class GameOverCheck : MonoBehaviour
         if(collision.gameObject.layer == LayerMask.NameToLayer("LightSource"))
         {
             gameManager.SetGameOver();
-            gameManager.RestartLevel();
+            //gameManager.RestartLevel();
             Destroy(collision.gameObject);
             Debug.Log("game over");
         }
