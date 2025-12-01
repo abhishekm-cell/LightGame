@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 
 public class GameManager : MonoBehaviour
@@ -53,10 +54,18 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Level cleared now!!!!!!!!!!");
             target.transform.position = endpoint.transform.position;
+            var endpointLight = endpoint.GetComponentInChildren<Light2D>();
+            endpointLight.intensity = 3f;   
+            levelManager.LoadNext();
+
+            
         }
         else
         {
+            var endpointLight = endpoint.GetComponentInChildren<Light2D>();
+            endpointLight.intensity = 0f; 
             Debug.LogWarning("Target is null! Was it destroyed or not spawned yet?");
         }
     }
+
 }

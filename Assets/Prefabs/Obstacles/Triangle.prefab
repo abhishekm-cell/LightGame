@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.3066038, g: 0.39603913, b: 1, a: 1}
   m_FlipX: 0
@@ -124,14 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b15045367baf43e39cf194726b7f2a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  portalIn: {fileID: 5316838987421825090}
   portalOut: {fileID: 8216758613313736041}
-  direction: {x: 0, y: 0}
-  outForce: 3
-  savedVelocity: {x: 0, y: 0}
-  contactLocalPos: {x: 0, y: 0}
-  offsetExit: 0.6
+  exitOffset: 0.5
+  velocityMultiplier: 4
 --- !u!1 &8216758613313736041
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +200,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.851668, g: 1, b: 0, a: 1}
   m_FlipX: 0
@@ -343,7 +338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ddcdc06b2fbe4a658b5b91b5d6b02bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotSPeed: 0
 --- !u!60 &8657202264336669219
 PolygonCollider2D:
   m_ObjectHideFlags: 0

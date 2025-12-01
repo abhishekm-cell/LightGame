@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class LevelManager : MonoBehaviour
     public GameObject[] obstaclePrefabs; // Index matches ObstacleType enum
     
     [Header("Current Level")]
+    public LevelData[] allLevels;
+    private int currentLevelIndex = 0;
     public LevelData currentLevel;
     
     [Header("Runtime References")]
@@ -25,10 +28,9 @@ public class LevelManager : MonoBehaviour
     
     void Start()
     {
-        //drawingController = FindObjectOfType<DrawManager>();
-        
-        if (currentLevel != null)
+        if (allLevels != null && allLevels.Length > 0)
         {
+            currentLevel = allLevels[currentLevelIndex];
             LoadLevel(currentLevel);
         }
     }
@@ -108,6 +110,10 @@ public class LevelManager : MonoBehaviour
         }
         
         GameObject obstacle = Instantiate(obstaclePrefabs[obstacleIndex], data.position, Quaternion.Euler(0, 0, 0));
+        if(obstacle.GetComponent<BlackHole>() != null)
+        {
+            obstacle.GetComponent<BlackHole>().SetGameManager(gameManager);
+        }
         //obstacle.transform.localScale = data.size;
         
         // Setup specific obstacle types based on their components
@@ -147,11 +153,35 @@ public class LevelManager : MonoBehaviour
     {
         LoadLevel(currentLevel);
     }
+    public void LoadNext()
+    {
+        currentLevelIndex++;
+
+        if (currentLevelIndex >= allLevels.Length)
+        {
+            Debug.Log("Completed All Levels!");
+            return;
+        }
+
+        currentLevel = allLevels[currentLevelIndex];
+        // LoadLevel(currentLevel);
+        StartCoroutine(DelayLoadNext(allLevels[currentLevelIndex]));// for TESTING
+        gameManager.levelCleared = false;
+    }
+    private IEnumerator DelayLoadNext(LevelData nextLevel) // FOR TESTING
+    {
+        yield return new WaitForSeconds(2f);
+        LoadLevel(nextLevel);   
+    }
+
     
     public void LoadNextLevel(LevelData nextLevel)
     {
         LoadLevel(nextLevel);
+        
     }
+    
+
     
     // Helper methods for getting references
     public GameObject GetLightSource()

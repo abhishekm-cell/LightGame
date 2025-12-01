@@ -1,4 +1,5 @@
-
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class BlackHole : MonoBehaviour
@@ -24,9 +25,8 @@ public class BlackHole : MonoBehaviour
                 targetRb.gravityScale = 0;
                 targetRb.velocity = Vector2.zero; 
             }
-            
             isMovingToCentre = true;
-            //gameManager.SetGameOver();
+            StartCoroutine(DelayGameOver());
         }
     }
 
@@ -41,6 +41,11 @@ public class BlackHole : MonoBehaviour
     {
         target = newTarget;
         Debug.Log("Target reference updated!");
+    }
+    private IEnumerator DelayGameOver()
+    {
+        yield return new WaitForSeconds(3f);
+        gameManager.SetGameOver();
     }
 
     void BlackHoleFunction()
@@ -58,6 +63,11 @@ public class BlackHole : MonoBehaviour
         {
             target.transform.position = Vector2.MoveTowards(target.transform.position, colliderCenter, moveSpeedToCentre * Time.deltaTime);
         }
+    }
+
+    public void SetGameManager(GameManager manager)
+    {
+        gameManager = manager;
     }
 
 }

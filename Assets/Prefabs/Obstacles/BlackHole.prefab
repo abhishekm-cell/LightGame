@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8821539645190811813}
   - component: {fileID: 8821539645190811812}
   - component: {fileID: 8821539645190811819}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BlackHole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 0.2264151, g: 0.18476325, b: 0.18476325, a: 1}
   m_FlipX: 0
@@ -101,7 +101,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
 --- !u!114 &8821539645190811819
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b15c7f78295744049bec48240aa5808e, type: 3}
-  m_Name: Level1
+  m_Name: Level2
   m_EditorClassIdentifier: 
   lightSource: {fileID: 4000177403436528712, guid: eea64200a550a4126a0369e7e7abf62c, type: 3}
   startPoint: {fileID: 7039154512654999422, guid: 164bfe4bf2bae4ed2a92fdf81f58c944, type: 3}
@@ -19,13 +19,17 @@ MonoBehaviour:
   endPointPosition: {x: 16, y: 2}
   platforms:
   - type: 0
-    spawnPoint: {x: -4, y: 0}
+    spawnPoint: {x: 5, y: -2}
     thickness: 1
-    platformColor: {r: 0.8584906, g: 0.6762638, b: 0.6762638, a: 0}
+    platformColor: {r: 0, g: 0, b: 0, a: 0}
+  - type: 1
+    spawnPoint: {x: 2, y: -4}
+    thickness: 1
+    platformColor: {r: 0, g: 0, b: 0, a: 0}
   obstacles:
-  - type: 2
-    position: {x: 6, y: 0}
   - type: 0
-    position: {x: 4, y: 2}
-  backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+    position: {x: 6, y: 5}
+  - type: 0
+    position: {x: 0, y: 0}
+  backgroundColor: {r: 1, g: 0, b: 0, a: 1}
   backgroundSprite: {fileID: 21300000, guid: 623e4af8466b2471f845579fe8081a8d, type: 3}

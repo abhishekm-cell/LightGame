@@ -29,7 +29,7 @@ public class LightSource : MonoBehaviour
         if(gameManager.levelCleared)
         {
             Debug.Log("level cleared");
-            rb.constraints = RigidbodyConstraints2D.FreezePosition;
+            //rb.constraints = RigidbodyConstraints2D.FreezePosition;
             gameManager.LevelClearCheck();
         }
         
@@ -50,6 +50,8 @@ public class LightSource : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("EndPoint")) //LayerMask.NameToLayer("EndPoint")
         {
             gameManager.levelCleared = true;
+            transform.position = collision.transform.position;
+            rb.constraints = RigidbodyConstraints2D.FreezePosition;
         }
 
         if(collision.gameObject.layer == LayerMask.NameToLayer("SpeedBoost"))
@@ -57,6 +59,7 @@ public class LightSource : MonoBehaviour
             Debug.Log("speed boost");
             rb.velocity *= speedBoost;
         }
+       
     }
     void LightSourceMove()
     {
@@ -64,15 +67,8 @@ public class LightSource : MonoBehaviour
         {
             rb.gravityScale = gravityMOD;
             rb.constraints = RigidbodyConstraints2D.None;
-            Debug.Log("touching");
-        }
-
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //     rb.constraints = RigidbodyConstraints2D.None;
-        //     rb.gravityScale = gravityMOD;
-        //     Debug.Log("touching2");
-        // }   
+            
+        } 
     }
 
     public float GetTopBound()

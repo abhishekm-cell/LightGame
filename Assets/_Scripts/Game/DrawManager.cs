@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.UI;
+
 public class DrawManager : MonoBehaviour
 {
     private Camera cam;
     [SerializeField] private Line linePrefab;
+    [SerializeField] private float inkLimit = 5f;   
+    private float inkUsed = 0f;                     
+    private Vector2 lastPoint;
+    [SerializeField] private Slider inkBar;
+    [SerializeField] private float inkAmt = 5f;
 
     [SerializeField] private List<Line> drawnLines = new List<Line>();
     
@@ -16,34 +23,58 @@ public class DrawManager : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+        if (inkBar != null)
+        {
+            inkBar.minValue = 0f;
+            inkBar.maxValue = 1f;
+            UpdateInkUI();
+        }
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
         HandleDrawTouch();
-        HandleMouseDraw();
+        //HandleMouseDraw();
         
     }
 
 
-    void HandleMouseDraw()
-    {
-        if (!Application.isEditor) return; 
-        Vector2 pos = cam.ScreenToWorldPoint(Input.mousePosition);
+    // void HandleMouseDraw()
+    // {
+    //     if (!Application.isEditor) return; 
+    //     Vector2 pos = cam.ScreenToWorldPoint(Input.mousePosition);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            _currentLine = Instantiate(linePrefab, pos, Quaternion.identity);
-            drawnLines.Add(_currentLine);
-        }
+    //     if (Input.GetMouseButtonDown(0))
+    //     {
+    //         _currentLine = Instantiate(linePrefab, pos, Quaternion.identity);
+    //         drawnLines.Add(_currentLine);
+    //     }
 
-        if (Input.GetMouseButton(0))
-        {
-            _currentLine?.SetPosition(pos);
-        }
-    }
+    //     if (Input.GetMouseButton(0))
+    //     {
+    //         _currentLine?.SetPosition(pos);
+    //     }
+    // }
     
+    // void HandleDrawTouch()
+    // {
+    //     if (Input.touchCount > 0)
+    //     {
+    //         Touch touch = Input.GetTouch(0);
+    //         Vector2 touchPos = cam.ScreenToWorldPoint(touch.position);
+
+    //         if (touch.phase == TouchPhase.Began)
+    //         {
+    //             _currentLine = Instantiate(linePrefab, touchPos, Quaternion.identity);
+    //             drawnLines.Add(_currentLine);
+    //         }
+    //         else if (touch.phase == TouchPhase.Moved)
+    //         {
+    //             _currentLine?.SetPosition(touchPos);
+    //         }
+    //     }
+    // }
     void HandleDrawTouch()
     {
         if (Input.touchCount > 0)
@@ -51,18 +82,65 @@ public class DrawManager : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             Vector2 touchPos = cam.ScreenToWorldPoint(touch.position);
 
+            // === START DRAW ===
             if (touch.phase == TouchPhase.Began)
             {
+                // Prevent drawing new line if out of ink
+                if (inkUsed >= inkLimit) return;
+
                 _currentLine = Instantiate(linePrefab, touchPos, Quaternion.identity);
                 drawnLines.Add(_currentLine);
+
+                lastPoint = touchPos; // important
             }
+
+            // === CONTINUE DRAWING ===
             else if (touch.phase == TouchPhase.Moved)
             {
-                _currentLine?.SetPosition(touchPos);
+                if (_currentLine == null) return;
+                if (inkUsed >= inkLimit) return;
+
+                float distance = Vector2.Distance(lastPoint, touchPos);
+
+                // Only add points if distance > resolution
+                if (distance >= Resolution)
+                {
+                    // Check if this stroke exceeds ink
+                    if (inkUsed + distance > inkLimit)
+                    {
+                        float allowed = inkLimit - inkUsed;
+
+                        // Clamp end of the line
+                        Vector2 finalPoint = lastPoint + (touchPos - lastPoint).normalized * allowed;
+
+                        _currentLine.SetPosition(finalPoint);
+                        inkUsed = inkLimit; // maxed out ink
+                        UpdateInkUI();
+
+                        _currentLine = null; // stop drawing NOW
+                        return;
+                    }
+
+                    // Normal drawing
+                    inkUsed += distance;
+                    lastPoint = touchPos;
+
+                    _currentLine.SetPosition(touchPos);
+                    UpdateInkUI();
+                }
             }
         }
     }
-     public void ClearAllLines()
+
+    void UpdateInkUI()
+    {
+        if(inkBar != null)
+        {
+            inkBar.value = 1f - (inkUsed / inkLimit);
+        }
+    }
+
+    public void ClearAllLines()
     {
         foreach (Line line in drawnLines)
         {
@@ -73,6 +151,8 @@ public class DrawManager : MonoBehaviour
         }
         drawnLines.Clear();
         _currentLine = null;
+        inkUsed = 0f;
+        UpdateInkUI();
     }
 
     public bool TouchCheck()
