@@ -159,7 +159,7 @@ public class LevelManager : MonoBehaviour
     {
         currentLevelIndex++;
 
-        if (currentLevelIndex >= allLevels.levels.Count)
+        if (currentLevelIndex > allLevels.levels.Count)
         {
             Debug.Log("Completed All Levels!");
             return;

@@ -27,8 +27,10 @@ public class PortalScript : MonoBehaviour
     {
         
         savedVelocity = rb.velocity;
+
         
         contactLocalPos = transform.InverseTransformPoint(obj.transform.position);
+
         
         TeleportToExit(obj, rb);
     }
@@ -36,15 +38,21 @@ public class PortalScript : MonoBehaviour
     private void TeleportToExit(GameObject obj, Rigidbody2D rb)
     {
         
-        Vector2 exitPos = portalOut.transform.TransformPoint(contactLocalPos);
-        
-        Vector2 newExitPos =new Vector2( exitPos.x + exitOffset,exitPos.y + exitOffset) ;
+        Vector3 exitPos = portalOut.transform.TransformPoint(contactLocalPos);
 
-        Vector2 finalExitPos = newExitPos; 
         
+        Vector2 exitForward = portalOut.transform.forward;   
+        Vector2 finalExitPos = (Vector2)exitPos + exitForward * exitOffset;
+
         obj.transform.position = finalExitPos;
+
         
-        Vector2 rotatedVelocity = portalOut.transform.rotation * savedVelocity;
-        rb.velocity = rotatedVelocity * velocityMultiplier;
+        float angleDiff = portalOut.transform.eulerAngles.z - transform.eulerAngles.z;
+        //Vector2 newVelocity = Quaternion.Euler(0, 0, 0)/*angleDiff*/ * savedVelocity;
+
+        Vector2 newVelocity = savedVelocity * velocityMultiplier;
+
+        rb.velocity = newVelocity;
     }
+
 } 

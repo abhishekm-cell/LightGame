@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 461ba3d09afb941b5bea67aac5907db7, type: 3}
   m_Name: ObstaclePrefabData
   m_EditorClassIdentifier: 
-  prefabDataList: []
+  prefabDataList:
+  - prefab: {fileID: 8821539645190811815, guid: adc75475945854bbca42362a105faa63, type: 3}
+    obstacleType: 0
+  - prefab: {fileID: 6397387418075589742, guid: 96eced96ff0244c6c90c2dfa602cee51, type: 3}
+    obstacleType: 1
+  - prefab: {fileID: 4873391997513286777, guid: f982f7585e6004c4fb6f17cd96b0a9ec, type: 3}
+    obstacleType: 2
+  - prefab: {fileID: 8657202264336669216, guid: 9b8e0f34a300e45198a63ea3cd5e1116, type: 3}
+    obstacleType: 3

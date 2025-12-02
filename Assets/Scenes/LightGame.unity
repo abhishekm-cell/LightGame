@@ -289,9 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb4277ddb86f40a6b57dd44fed5c977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnManager: {fileID: 0}
   drawManager: {fileID: 767446225}
-  floor: {fileID: 0}
   startPT: {fileID: 7039154512654999422, guid: 164bfe4bf2bae4ed2a92fdf81f58c944, type: 3}
   target: {fileID: 4000177403436528716, guid: eea64200a550a4126a0369e7e7abf62c, type: 3}
   endpoint: {fileID: 6954521963217031439, guid: 4b76c3b95583f444cb8f999628fc5b4f, type: 3}
@@ -347,15 +345,19 @@ MonoBehaviour:
   startPointPrefab: {fileID: 7039154512654999423, guid: 164bfe4bf2bae4ed2a92fdf81f58c944, type: 3}
   endPointPrefab: {fileID: 6954521963217031439, guid: 4b76c3b95583f444cb8f999628fc5b4f, type: 3}
   platformPrefab: {fileID: 4882962054025523585, guid: 784ed1a2c863e45f190dcef7a6302457, type: 3}
-  obstaclePrefabs:
-  - {fileID: 6397387418075589742, guid: 96eced96ff0244c6c90c2dfa602cee51, type: 3}
-  - {fileID: 4873391997513286777, guid: f982f7585e6004c4fb6f17cd96b0a9ec, type: 3}
-  - {fileID: 8821539645190811815, guid: adc75475945854bbca42362a105faa63, type: 3}
-  - {fileID: 8657202264336669216, guid: 9b8e0f34a300e45198a63ea3cd5e1116, type: 3}
-  allLevels:
-  - {fileID: 11400000, guid: 7e7746a1fd6634766997564b855985c4, type: 2}
-  - {fileID: 11400000, guid: 6cb3cbbbdb6db4507b85061daa9817c4, type: 2}
-  currentLevel: {fileID: 11400000, guid: 7e7746a1fd6634766997564b855985c4, type: 2}
+  obstacleData: {fileID: 11400000, guid: 846ec6910ee274916b251872eb795c13, type: 2}
+  allLevels: {fileID: 11400000, guid: 201ad9148c4da49ae88e9f2268095f12, type: 2}
+  currentLevel:
+    levelNumber: 0
+    lightSource: {fileID: 0}
+    startPoint: {fileID: 0}
+    endPoint: {fileID: 0}
+    startPointPosition: {x: 0, y: 0}
+    endPointPosition: {x: 0, y: 0}
+    platforms: []
+    obstacles: []
+    backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+    backgroundSprite: {fileID: 0}
   drawingController: {fileID: 767446225}
   gameManager: {fileID: 432925815}
 --- !u!1 &519420028
@@ -711,7 +713,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637989330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16, y: 7, z: -1}
+  m_LocalPosition: {x: 2, y: 4, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -865,9 +867,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linePrefab: {fileID: 8775755825630963496, guid: da378e39682a64a148065fff20a055cc, type: 3}
-  inkLimit: 40
+  inkLimit: 80
   inkBar: {fileID: 289158214}
-  inkAmt: 1
   drawnLines: []
 --- !u!1 &811974282
 GameObject:
