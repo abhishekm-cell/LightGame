@@ -21,12 +21,12 @@ MonoBehaviour:
     endPointPosition: {x: 14, y: -5}
     platforms:
     - type: 0
-      spawnPoint: {x: -12, y: -2}
+      spawnPoint: {x: -14, y: -2}
       targetRotation: 90
       thickness: 1
       platformColor: {r: 0, g: 0, b: 0, a: 0}
     - type: 0
-      spawnPoint: {x: -8, y: -5.5}
+      spawnPoint: {x: -10, y: -5.5}
       targetRotation: 0
       thickness: 1
       platformColor: {r: 0, g: 0, b: 0, a: 0}
@@ -37,12 +37,12 @@ MonoBehaviour:
       platformColor: {r: 0, g: 0, b: 0, a: 0}
     obstacles:
     - type: 1
-      position: {x: -5, y: -5}
+      position: {x: -8, y: -5}
       targetRotation: 0
     - type: 1
       position: {x: 2, y: -0.5}
       targetRotation: 0
-    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    backgroundColor: {r: 1, g: 1, b: 1, a: 0}
     backgroundSprite: {fileID: 21300000, guid: b3c3e91bec5344b9cb8ba0c35d18402f, type: 3}
   - levelNumber: 2
     lightSource: {fileID: 4000177403436528712, guid: eea64200a550a4126a0369e7e7abf62c, type: 3}
@@ -80,27 +80,37 @@ MonoBehaviour:
     endPointPosition: {x: 16, y: 4}
     platforms:
     - type: 0
-      spawnPoint: {x: -16, y: 0}
+      spawnPoint: {x: -18, y: 0}
       targetRotation: 90
       thickness: 1
       platformColor: {r: 0, g: 0, b: 0, a: 0}
     - type: 0
-      spawnPoint: {x: -12, y: -3.5}
+      spawnPoint: {x: -13.5, y: -3.5}
       targetRotation: 0
       thickness: 1
       platformColor: {r: 0, g: 0, b: 0, a: 0}
-    obstacles:
     - type: 0
-      position: {x: 6, y: 6}
+      spawnPoint: {x: 4, y: -5.5}
+      targetRotation: 0
+      thickness: 1
+      platformColor: {r: 0, g: 0, b: 0, a: 0}
+    - type: 0
+      spawnPoint: {x: 8, y: -1.5}
+      targetRotation: 90
+      thickness: 1
+      platformColor: {r: 0, g: 0, b: 0, a: 0}
+    obstacles:
+    - type: 1
+      position: {x: 6, y: -3}
       targetRotation: 0
     - type: 2
-      position: {x: -14, y: 1}
-      targetRotation: 180
+      position: {x: -11, y: -1}
+      targetRotation: 270
     - type: 3
       position: {x: 0.5, y: -1}
       targetRotation: 0
     - type: 1
-      position: {x: -12, y: -2}
-      targetRotation: -45
+      position: {x: 12, y: -2}
+      targetRotation: 25
     backgroundColor: {r: 0, g: 0, b: 0, a: 0}
     backgroundSprite: {fileID: 21300000, guid: b3c3e91bec5344b9cb8ba0c35d18402f, type: 3}

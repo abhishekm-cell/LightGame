@@ -54,7 +54,7 @@ public class LevelManager : MonoBehaviour
         currentLevel = level;
         
         // Set background
-        Camera.main.backgroundColor = level.backgroundColor;
+       // Camera.main.backgroundColor = level.backgroundColor;
         
         startPointInstance = Instantiate(startPointPrefab, level.startPointPosition, Quaternion.identity);
         spawnedObjects.Add(startPointInstance);

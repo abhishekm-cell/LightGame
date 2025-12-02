@@ -35,7 +35,7 @@ public class DrawManager : MonoBehaviour
     void LateUpdate()
     {
         HandleDrawTouch();
-        //HandleMouseDraw();
+        
         
     }
 
@@ -49,13 +49,13 @@ public class DrawManager : MonoBehaviour
             // === START DRAW ===
             if (touch.phase == TouchPhase.Began)
             {
-                // Prevent drawing new line if out of ink
+                
                 if (inkUsed >= inkLimit) return;
 
                 _currentLine = Instantiate(linePrefab, touchPos, Quaternion.identity);
                 drawnLines.Add(_currentLine);
 
-                lastPoint = touchPos; // important
+                lastPoint = touchPos; 
             }
 
             // === CONTINUE DRAWING ===
@@ -66,26 +66,25 @@ public class DrawManager : MonoBehaviour
 
                 float distance = Vector2.Distance(lastPoint, touchPos);
 
-                // Only add points if distance > resolution
+                
                 if (distance >= Resolution)
                 {
-                    // Check if this stroke exceeds ink
                     if (inkUsed + distance > inkLimit)
                     {
                         float allowed = inkLimit - inkUsed;
 
-                        // Clamp end of the line
+                        
                         Vector2 finalPoint = lastPoint + (touchPos - lastPoint).normalized * allowed;
 
                         _currentLine.SetPosition(finalPoint);
-                        inkUsed = inkLimit; // maxed out ink
+                        inkUsed = inkLimit; 
                         UpdateInkUI();
 
-                        _currentLine = null; // stop drawing NOW
+                        _currentLine = null; 
                         return;
                     }
 
-                    // Normal drawing
+                    
                     inkUsed += distance;
                     lastPoint = touchPos;
 
