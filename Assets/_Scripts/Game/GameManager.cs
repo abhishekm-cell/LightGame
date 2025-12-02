@@ -5,9 +5,9 @@ using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private SpawnManager spawnManager;
+    //[SerializeField] private SpawnManager spawnManager;
     [SerializeField] private DrawManager drawManager;   
-    [SerializeField] private GameObject floor;
+   // [SerializeField] private GameObject floor;
     [SerializeField] private Transform startPT;
     [SerializeField] private GameObject target;
     [SerializeField] private GameObject endpoint;
@@ -57,8 +57,6 @@ public class GameManager : MonoBehaviour
             var endpointLight = endpoint.GetComponentInChildren<Light2D>();
             endpointLight.intensity = 3f;   
             levelManager.LoadNext();
-
-            
         }
         else
         {

@@ -12,7 +12,7 @@ public class DrawManager : MonoBehaviour
     private float inkUsed = 0f;                     
     private Vector2 lastPoint;
     [SerializeField] private Slider inkBar;
-    [SerializeField] private float inkAmt = 5f;
+    
 
     [SerializeField] private List<Line> drawnLines = new List<Line>();
     
@@ -39,42 +39,6 @@ public class DrawManager : MonoBehaviour
         
     }
 
-
-    // void HandleMouseDraw()
-    // {
-    //     if (!Application.isEditor) return; 
-    //     Vector2 pos = cam.ScreenToWorldPoint(Input.mousePosition);
-
-    //     if (Input.GetMouseButtonDown(0))
-    //     {
-    //         _currentLine = Instantiate(linePrefab, pos, Quaternion.identity);
-    //         drawnLines.Add(_currentLine);
-    //     }
-
-    //     if (Input.GetMouseButton(0))
-    //     {
-    //         _currentLine?.SetPosition(pos);
-    //     }
-    // }
-    
-    // void HandleDrawTouch()
-    // {
-    //     if (Input.touchCount > 0)
-    //     {
-    //         Touch touch = Input.GetTouch(0);
-    //         Vector2 touchPos = cam.ScreenToWorldPoint(touch.position);
-
-    //         if (touch.phase == TouchPhase.Began)
-    //         {
-    //             _currentLine = Instantiate(linePrefab, touchPos, Quaternion.identity);
-    //             drawnLines.Add(_currentLine);
-    //         }
-    //         else if (touch.phase == TouchPhase.Moved)
-    //         {
-    //             _currentLine?.SetPosition(touchPos);
-    //         }
-    //     }
-    // }
     void HandleDrawTouch()
     {
         if (Input.touchCount > 0)

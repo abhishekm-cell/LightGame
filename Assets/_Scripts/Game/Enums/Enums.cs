@@ -1,11 +1,11 @@
 public enum ObstacleType
 {
-    RotationPortal,
-    SpringPad,
-    BlackHole,
-    SpeedBoost,
-
+    BlackHole,     // 0
+    SpringPad,     // 1
+    SpeedBoost,    // 2
+    RotationPortal // 3
 }
+
 
 public enum PlatformType
 {

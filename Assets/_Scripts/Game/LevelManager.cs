@@ -9,11 +9,13 @@ public class LevelManager : MonoBehaviour
     public GameObject startPointPrefab;
     public GameObject endPointPrefab; // The goal/end point
     public GameObject platformPrefab; // For creating static platforms
-    public GameObject[] obstaclePrefabs; // Index matches ObstacleType enum
+   public PreFabData  obstacleData;
+
+   private Dictionary<ObstacleType, GameObject> obstaclePrefabData = new Dictionary<ObstacleType, GameObject>();
     
     [Header("Current Level")]
-    public LevelData[] allLevels;
-    private int currentLevelIndex = 0;
+    public LevelDataSO allLevels;
+    private int currentLevelIndex = 1;
     public LevelData currentLevel;
     
     [Header("Runtime References")]
@@ -27,12 +29,17 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameManager gameManager;
     
     void Start()
-    {
-        if (allLevels != null && allLevels.Length > 0)
+    {   
+        foreach(Prefab p in obstacleData.prefabDataList)
         {
-            currentLevel = allLevels[currentLevelIndex];
+            obstaclePrefabData.Add(p.obstacleType, p.prefab);
+        }
+        if (allLevels != null && allLevels.levels.Count > 0)
+        {
+            currentLevel = allLevels.levels[currentLevelIndex-1];
             LoadLevel(currentLevel);
         }
+    
     }
     
     public void LoadLevel(LevelData level)
@@ -87,6 +94,7 @@ public class LevelManager : MonoBehaviour
         
         platform.transform.position = data.spawnPoint;
 
+        platform.transform.rotation = Quaternion.Euler(0, 0, data.targetRotation);
         
         platform.transform.localScale = new Vector3(platform.transform.localScale.x,1);
 
@@ -102,19 +110,12 @@ public class LevelManager : MonoBehaviour
 
     void CreateObstacle(ObstacleData data)
     {
-        int obstacleIndex = (int)data.type;
-        if (obstacleIndex >= obstaclePrefabs.Length || obstaclePrefabs[obstacleIndex] == null)
-        {
-            Debug.LogWarning($"No prefab assigned for obstacle type: {data.type}");
-            return;
-        }
-        
-        GameObject obstacle = Instantiate(obstaclePrefabs[obstacleIndex], data.position, Quaternion.Euler(0, 0, 0));
+        GameObject obstacle = Instantiate(obstaclePrefabData[data.type], data.position, Quaternion.Euler(0, 0, data.targetRotation));
         if(obstacle.GetComponent<BlackHole>() != null)
         {
             obstacle.GetComponent<BlackHole>().SetGameManager(gameManager);
         }
-        //obstacle.transform.localScale = data.size;
+        
         
         // Setup specific obstacle types based on their components
         switch (data.type)
@@ -128,6 +129,7 @@ public class LevelManager : MonoBehaviour
             case ObstacleType.SpeedBoost:
                 break;
         }
+        Debug.Log("Obstacle Data Type = " + data.type + " (int = " + (int)data.type + ")");
         
         spawnedObjects.Add(obstacle);
     }
@@ -157,15 +159,15 @@ public class LevelManager : MonoBehaviour
     {
         currentLevelIndex++;
 
-        if (currentLevelIndex >= allLevels.Length)
+        if (currentLevelIndex >= allLevels.levels.Count)
         {
             Debug.Log("Completed All Levels!");
             return;
         }
 
-        currentLevel = allLevels[currentLevelIndex];
+        currentLevel = allLevels.levels[currentLevelIndex-1];
         // LoadLevel(currentLevel);
-        StartCoroutine(DelayLoadNext(allLevels[currentLevelIndex]));// for TESTING
+        StartCoroutine(DelayLoadNext(currentLevel));// for TESTING
         gameManager.levelCleared = false;
     }
     private IEnumerator DelayLoadNext(LevelData nextLevel) // FOR TESTING
