@@ -5,7 +5,7 @@ public class Line : MonoBehaviour
 {
     [SerializeField] private LineRenderer _renderer;
     [SerializeField] private EdgeCollider2D _collider;
-
+    public LayerMask obstacleMask;
     private List<Vector2> rawPoints = new List<Vector2>();      
     private List<Vector2> smoothPoints = new List<Vector2>();   
 
@@ -16,9 +16,43 @@ public class Line : MonoBehaviour
         _collider.transform.position -= transform.position;
     }
 
+    // public void SetPosition(Vector2 pos)
+    // {
+        
+    //     if (rawPoints.Count == 0)
+    //     {
+    //         rawPoints.Add(pos);
+    //         UpdateLine();
+    //         return;
+    //     }
+
+        
+    //     if (Vector2.Distance(rawPoints[rawPoints.Count - 1], pos) < DrawManager.Resolution)
+    //         return;
+
+    //     rawPoints.Add(pos);
+    //     UpdateLine();
+    // }
+
+    
+
     public void SetPosition(Vector2 pos)
     {
-        
+        if (rawPoints.Count > 0)
+        {
+            Vector2 lastPoint = rawPoints[rawPoints.Count - 1];
+
+            // CHECK IF LINE WOULD CROSS AN OBSTACLE
+            RaycastHit2D hit = Physics2D.Linecast(lastPoint, pos, obstacleMask);
+
+            if (hit.collider != null)
+            {
+                // Block drawing on obstacles
+                return;
+            }
+        }
+
+        // ===== existing code below =====
         if (rawPoints.Count == 0)
         {
             rawPoints.Add(pos);
@@ -26,13 +60,13 @@ public class Line : MonoBehaviour
             return;
         }
 
-        
         if (Vector2.Distance(rawPoints[rawPoints.Count - 1], pos) < DrawManager.Resolution)
             return;
 
         rawPoints.Add(pos);
         UpdateLine();
     }
+
 
     void UpdateLine()
     {

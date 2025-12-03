@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,12 @@ public class GameUI : MonoBehaviour
     }
     void LateUpdate()
     {
-        levelText.text = "Level " + levelManager.currentLevelIndex ;
+        UpdateLevelText();
+    }
+
+    void UpdateLevelText()
+    {
+        if(levelManager.allLevels.levels.Last() == levelManager.currentLevel)
+        levelText.text = "Level " + levelManager.currentLevelIndex;
     }
 }

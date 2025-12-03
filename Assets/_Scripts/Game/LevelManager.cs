@@ -53,9 +53,6 @@ public class LevelManager : MonoBehaviour
         ClearLevel();
         currentLevel = level;
         
-        // Set background
-       // Camera.main.backgroundColor = level.backgroundColor;
-        
         startPointInstance = Instantiate(startPointPrefab, level.startPointPosition, Quaternion.identity);
         spawnedObjects.Add(startPointInstance);
         // Spawn light source (ball) at start position

@@ -1077,6 +1077,7 @@ MonoBehaviour:
   linePrefab: {fileID: 8775755825630963496, guid: da378e39682a64a148065fff20a055cc, type: 3}
   inkLimit: 80
   inkBar: {fileID: 289158214}
+  gameManager: {fileID: 432925815}
   drawnLines: []
 --- !u!1 &811974282
 GameObject:

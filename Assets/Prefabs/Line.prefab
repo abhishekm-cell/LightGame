@@ -199,4 +199,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _renderer: {fileID: 6140229636233789755}
   _collider: {fileID: 2762474465598823780}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 3136
   smoothingIterations: 5

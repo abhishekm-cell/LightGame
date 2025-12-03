@@ -9,7 +9,7 @@ public class UpThrust : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("LightSource"))
         {
             Debug.Log("Up thrust");
-            other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * _force, ForceMode2D.Impulse);
+            other.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * _force, ForceMode2D.Impulse);
         }
     }
 

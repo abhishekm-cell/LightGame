@@ -12,7 +12,7 @@ public class DrawManager : MonoBehaviour
     private float inkUsed = 0f;                     
     private Vector2 lastPoint;
     [SerializeField] private Slider inkBar;
-    
+    [SerializeField] private GameManager gameManager;    
 
     [SerializeField] private List<Line> drawnLines = new List<Line>();
     
@@ -35,8 +35,6 @@ public class DrawManager : MonoBehaviour
     void LateUpdate()
     {
         HandleDrawTouch();
-        
-        
     }
 
     void HandleDrawTouch()
