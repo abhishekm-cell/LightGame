@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     
     [Header("Current Level")]
     public LevelDataSO allLevels;
-    private int currentLevelIndex = 1;
+    public int currentLevelIndex = 1;
     public LevelData currentLevel;
     
     [Header("Runtime References")]
@@ -79,11 +79,6 @@ public class LevelManager : MonoBehaviour
             CreateObstacle(obstacleData);
         }
         
-        // Set ink limit for drawing lines
-        // if (drawingController != null && level.hasInkLimit)
-        // {
-        //     drawingController.SetInkLimit(level.inkLimit);
-        // }
     }
     
     void CreatePlatform(PlatformData data)
@@ -155,6 +150,7 @@ public class LevelManager : MonoBehaviour
     {
         LoadLevel(currentLevel);
     }
+
     public void LoadNext()
     {
         currentLevelIndex++;
