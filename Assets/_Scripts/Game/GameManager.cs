@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
     public bool gameOver { get; private set; }
     public bool gamestarted = false;  
     public bool levelCleared = false;
+    private bool onLastLevel = false;
 
     //public event System.Action GameOver;
 
@@ -50,6 +52,10 @@ public class GameManager : MonoBehaviour
 
     public void LevelClearCheck()
     {
+        if(onLastLevel)
+        {
+            return;
+        }
         if (target != null)
         {
             Debug.Log("Level cleared now!!!!!!!!!!");
@@ -66,4 +72,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnLastLevel()
+    {
+        onLastLevel = true;
+    }
+
+    public bool IsOnLastLevel()
+    {
+        return onLastLevel;
+    }
 }

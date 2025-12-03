@@ -52,6 +52,9 @@ MonoBehaviour:
     - type: 1
       position: {x: -1.5, y: 0}
       targetRotation: 0
+    - type: 2
+      position: {x: -6.3, y: 0}
+      targetRotation: -90
     backgroundColor: {r: 1, g: 1, b: 1, a: 0}
     backgroundSprite: {fileID: 21300000, guid: b3c3e91bec5344b9cb8ba0c35d18402f, type: 3}
   - levelNumber: 2
@@ -147,7 +150,51 @@ MonoBehaviour:
     startPoint: {fileID: 7039154512654999422, guid: 164bfe4bf2bae4ed2a92fdf81f58c944, type: 3}
     endPoint: {fileID: 6954521963217031438, guid: 4b76c3b95583f444cb8f999628fc5b4f, type: 3}
     startPointPosition: {x: -16, y: 6}
-    endPointPosition: {x: 16, y: 0}
+    endPointPosition: {x: 14, y: 0}
+    platforms:
+    - type: 0
+      spawnPoint: {x: -13, y: -7}
+      targetRotation: 0
+      thickness: 0
+      platformColor: {r: 0, g: 0, b: 0, a: 0}
+    - type: 0
+      spawnPoint: {x: -10, y: 2}
+      targetRotation: 90
+      thickness: 0
+      platformColor: {r: 0, g: 0, b: 0, a: 0}
+    - type: 0
+      spawnPoint: {x: 13, y: -7}
+      targetRotation: 0
+      thickness: 0
+      platformColor: {r: 0, g: 0, b: 0, a: 0}
+    - type: 0
+      spawnPoint: {x: 8, y: 0}
+      targetRotation: 90
+      thickness: 0
+      platformColor: {r: 0, g: 0, b: 0, a: 0}
+    - type: 0
+      spawnPoint: {x: 16.5, y: -2.5}
+      targetRotation: 90
+      thickness: 0
+      platformColor: {r: 0, g: 0, b: 0, a: 0}
+    obstacles:
+    - type: 3
+      position: {x: 0, y: -5.5}
+      targetRotation: 0
+    - type: 2
+      position: {x: -10, y: -5}
+      targetRotation: 0
+    - type: 1
+      position: {x: 14, y: -6.5}
+      targetRotation: 0
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    backgroundSprite: {fileID: 21300000, guid: b3c3e91bec5344b9cb8ba0c35d18402f, type: 3}
+  - levelNumber: 5
+    lightSource: {fileID: 4000177403436528712, guid: eea64200a550a4126a0369e7e7abf62c, type: 3}
+    startPoint: {fileID: 7039154512654999422, guid: 164bfe4bf2bae4ed2a92fdf81f58c944, type: 3}
+    endPoint: {fileID: 6954521963217031438, guid: 4b76c3b95583f444cb8f999628fc5b4f, type: 3}
+    startPointPosition: {x: -16, y: 6}
+    endPointPosition: {x: 14, y: 0}
     platforms: []
     obstacles: []
     backgroundColor: {r: 0, g: 0, b: 0, a: 0}

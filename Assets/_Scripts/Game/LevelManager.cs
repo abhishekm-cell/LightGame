@@ -154,7 +154,8 @@ public class LevelManager : MonoBehaviour
 
         if (currentLevelIndex > allLevels.levels.Count)
         {
-            Debug.Log("Completed All Levels!");
+            gameManager.OnLastLevel();
+            //Debug.Log("Completed All Levels!");
             return;
         }
 

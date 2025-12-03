@@ -28,7 +28,7 @@ public class LightSource : MonoBehaviour
         LightSourceMove();
         if(gameManager.levelCleared)
         {
-            Debug.Log("level cleared");
+            //Debug.Log("level cleared");
             //rb.constraints = RigidbodyConstraints2D.FreezePosition;
             gameManager.LevelClearCheck();
         }

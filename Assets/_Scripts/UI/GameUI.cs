@@ -29,7 +29,7 @@ public class GameUI : MonoBehaviour
 
     void UpdateLevelText()
     {
-        if(levelManager.allLevels.levels.Last() == levelManager.currentLevel)
+        //if(levelManager.allLevels.levels.Last() == levelManager.currentLevel)
         levelText.text = "Level " + levelManager.currentLevelIndex;
     }
 }
