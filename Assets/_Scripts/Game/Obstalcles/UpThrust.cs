@@ -11,8 +11,6 @@ public class UpThrust : MonoBehaviour
             Debug.Log("Up thrust");
             other.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * _force, ForceMode2D.Impulse);
         }
-    }
-
-    
+    }  
 
 }

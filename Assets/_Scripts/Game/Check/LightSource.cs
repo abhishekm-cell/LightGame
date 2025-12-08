@@ -57,6 +57,7 @@ public class LightSource : MonoBehaviour
         if(collision.gameObject.layer == LayerMask.NameToLayer("SpeedBoost"))
         {
             Debug.Log("speed boost");
+
             rb.velocity *= speedBoost;
         }
        

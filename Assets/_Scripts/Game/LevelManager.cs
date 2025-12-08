@@ -11,6 +11,8 @@ public class LevelManager : MonoBehaviour
     public GameObject platformPrefab; // For creating static platforms
    public PreFabData  obstacleData;
 
+   private PortalScript portalScript;
+
    private Dictionary<ObstacleType, GameObject> obstaclePrefabData = new Dictionary<ObstacleType, GameObject>();
     
     [Header("Current Level")]
@@ -39,7 +41,7 @@ public class LevelManager : MonoBehaviour
             currentLevel = allLevels.levels[currentLevelIndex-1];
             LoadLevel(currentLevel);
         }
-    
+        portalScript = null;
     }
     
     public void LoadLevel(LevelData level)
@@ -101,26 +103,37 @@ public class LevelManager : MonoBehaviour
     }
 
     void CreateObstacle(ObstacleData data)
-    {
-        GameObject obstacle = Instantiate(obstaclePrefabData[data.type], data.position, Quaternion.Euler(0, 0, data.targetRotation));
+    {   GameObject obstacle = Instantiate(obstaclePrefabData[data.type], data.position, Quaternion.Euler(0, 0, data.targetRotation));
         if(obstacle.GetComponent<BlackHole>() != null)
         {
             obstacle.GetComponent<BlackHole>().SetGameManager(gameManager);
         }
-        
+        if(obstacle.GetComponent<PortalScript>() != null)
+        {
+            portalScript = obstacle.GetComponent<PortalScript>();
+        }
+        if(data.type == ObstacleType.PortalOut && portalScript != null)
+        {
+            portalScript.SetOutPortal(obstacle);
+            portalScript = null;
+        }
         
         // Setup specific obstacle types based on their components
-        switch (data.type)
-        {
-            case ObstacleType.RotationPortal:
-                break;
-            case ObstacleType.BlackHole:
-                break;
-            case ObstacleType.SpringPad:
-                break;
-            case ObstacleType.SpeedBoost:
-                break;
-        }
+        // switch (data.type)
+        // {
+        //     case ObstacleType.RotationPortal:
+        //         break;
+        //     case ObstacleType.BlackHole:
+        //         break;
+        //     case ObstacleType.SpringPad:
+        //         break;
+        //     case ObstacleType.SpeedBoost:
+        //         break;
+        //     case ObstacleType.PortalIn:
+        //         break;
+        //     case ObstacleType.PortalOut:
+        //         break;
+        //}
         Debug.Log("Obstacle Data Type = " + data.type + " (int = " + (int)data.type + ")");
         
         spawnedObjects.Add(obstacle);
