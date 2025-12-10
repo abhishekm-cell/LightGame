@@ -11,14 +11,18 @@ public class GameUI : MonoBehaviour
     // [SerializeField] private Button backToMenuButton;
 
     [Header("References")]
-    [SerializeField] private LevelManager levelManager;
 
     [Header("Text")]
     [SerializeField]private TextMeshProUGUI levelText;
+    private UIManager uIManager;
 
+    public void SetRefrence(UIManager uIManager)
+    {
+        this.uIManager = uIManager;
+    }
     void Awake()
     {
-        restartButton.onClick.AddListener(() => levelManager.RestartLevel());
+        restartButton.onClick.AddListener(() => uIManager.RestartLevel());
 
         
     }
@@ -30,6 +34,6 @@ public class GameUI : MonoBehaviour
     void UpdateLevelText()
     {
         //if(levelManager.allLevels.levels.Last() == levelManager.currentLevel)
-        levelText.text = "Level " + levelManager.currentLevelIndex;
+        levelText.text = "Level " + uIManager.GetCurrentLevelIndex();
     }
 }

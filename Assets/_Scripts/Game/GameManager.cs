@@ -1,5 +1,3 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -14,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject endpoint;
     [SerializeField] private BlackHole blackHole;
     [SerializeField] private LevelManager levelManager;
+    [SerializeField] private LevelDataManager levelDataManager;
+    [SerializeField] private UIManager uiManager;
     public bool gameOver { get; private set; }
     public bool gamestarted = false;  
     public bool levelCleared = false;
@@ -21,17 +21,17 @@ public class GameManager : MonoBehaviour
 
     //public event System.Action GameOver;
 
-
-    public void UpdateTargetReference(GameObject newTarget)
+    void Awake()
     {
-        target = newTarget;
-        if(blackHole != null)
-        {
-            blackHole.UpdateTarget(newTarget);
-            Debug.Log("Target reference updated!");
-        }
-    }  
-        
+        levelDataManager = new LevelDataManager();
+        //setting refrence
+        levelManager.SetReferece(this);
+        levelDataManager.SetReferece(this);
+        uiManager.SetReferece(this);
+        drawManager.SetRefernce(this);
+        //loading data
+        levelDataManager.LoadData();
+    }
 
     /*
         Game will start / be inplay when there are no ui panels active, if panels are active game will be in pause state
@@ -81,4 +81,11 @@ public class GameManager : MonoBehaviour
     {
         return onLastLevel;
     }
+    public int GetLevelData()=>levelManager.allLevels.levels.Count;
+
+    //managers
+    public LevelManager GetLevelManager()=>levelManager;
+    public DrawManager GetDrawManager()=>drawManager;
+    public LevelDataManager GetLevelDataManager()=>levelDataManager;
+    public BlackHole GetBlackHole()=>blackHole;
 }

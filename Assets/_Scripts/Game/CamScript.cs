@@ -1,16 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CamScript : MonoBehaviour
 {
     public float targetAspect = 16f / 9f; // Your target aspect ratio
     public float baseOrthographicSize = 5f; // Your designed camera size
-    
-    void Start()
-    {
-        
-    }
 
     void Update()
     {

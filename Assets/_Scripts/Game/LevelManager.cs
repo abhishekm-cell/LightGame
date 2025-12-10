@@ -27,8 +27,11 @@ public class LevelManager : MonoBehaviour
     private GameObject endPointInstance;
     
     private List<GameObject> spawnedObjects = new List<GameObject>();
-    [SerializeField] private DrawManager drawingController;
-    [SerializeField] private GameManager gameManager;
+    private GameManager gameManager;
+    public void SetReferece(GameManager gameManager)
+    {
+        this.gameManager = gameManager;
+    }
     
     void Start()
     {   
@@ -150,11 +153,13 @@ public class LevelManager : MonoBehaviour
         spawnedObjects.Clear();
         
         // Clear any drawn lines from previous level
-        if (drawingController != null)
+        if (gameManager.GetDrawManager() != null)
         {
-            drawingController.ClearAllLines();
+            gameManager.GetDrawManager().ClearAllLines();
         }
     }
+
+    //drawmam = gameManager.GetDrawManager()
     
     public void RestartLevel()
     {

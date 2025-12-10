@@ -37,7 +37,7 @@ public class SpawnManager : MonoBehaviour
         newLightSource.GetComponent<LightSource>().SetGameManager(gameManager);
         
         
-        gameManager.UpdateTargetReference(newLightSource);
+        gameManager.GetBlackHole().UpdateTarget(newLightSource);
     }
     
 

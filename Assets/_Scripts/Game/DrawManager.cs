@@ -12,13 +12,19 @@ public class DrawManager : MonoBehaviour
     private float inkUsed = 0f;                     
     private Vector2 lastPoint;
     [SerializeField] private Slider inkBar;
-    [SerializeField] private GameManager gameManager;    
 
     [SerializeField] private List<Line> drawnLines = new List<Line>();
     
     public Line _currentLine {get; set;}
     
     public const float Resolution = 0.1f;
+
+    private GameManager gameManager;    
+
+    public void SetRefernce(GameManager gameManager)
+    {
+        this.gameManager = gameManager;
+    }
     
     void Start()
     {
