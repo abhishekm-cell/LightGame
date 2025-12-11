@@ -758,7 +758,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 12.931856
+  orthographic size: 20.847872
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2240,7 +2240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 324251740542612722, guid: 14424e679242447f88b6ce577110a238, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.46870056
+      value: -0.46174863
       objectReference: {fileID: 0}
     - target: {fileID: 324251740542612722, guid: 14424e679242447f88b6ce577110a238, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2252,7 +2252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 324251740542612722, guid: 14424e679242447f88b6ce577110a238, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.8833571
+      value: 0.8870109
       objectReference: {fileID: 0}
     - target: {fileID: 324251740542612722, guid: 14424e679242447f88b6ce577110a238, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2264,11 +2264,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 324251740542612722, guid: 14424e679242447f88b6ce577110a238, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 235.9
+      value: 235
       objectReference: {fileID: 0}
     - target: {fileID: 324251740542612732, guid: 14424e679242447f88b6ce577110a238, type: 3}
       propertyPath: m_Name
       value: Portal OUt
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621509612586566437, guid: 14424e679242447f88b6ce577110a238, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.46174863
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621509612586566437, guid: 14424e679242447f88b6ce577110a238, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621509612586566437, guid: 14424e679242447f88b6ce577110a238, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.8870109
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621509612586566437, guid: 14424e679242447f88b6ce577110a238, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 235
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14424e679242447f88b6ce577110a238, type: 3}
