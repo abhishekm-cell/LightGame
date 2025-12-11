@@ -39,15 +39,15 @@ public class LevelManager : MonoBehaviour
         {
             obstaclePrefabData.Add(p.obstacleType, p.prefab);
         }
-        if (allLevels != null && allLevels.levels.Count > 0)
-        {
-            currentLevel = allLevels.levels[currentLevelIndex-1];
-            LoadLevel(currentLevel);
-        }
-        portalScript = null;
+        // if (allLevels != null && allLevels.levels.Count > 0)
+        // {
+        //     currentLevel = allLevels.levels[currentLevelIndex-1];
+        //     GenrateLevel(currentLevel);
+        // }
+        // portalScript = null;
     }
     
-    public void LoadLevel(LevelData level)
+    public void GenrateLevel(LevelData level)
     {
         if (level == null)
         {
@@ -142,7 +142,7 @@ public class LevelManager : MonoBehaviour
         spawnedObjects.Add(obstacle);
     }
     
-    void ClearLevel()
+    private void ClearLevel()
     {
         // Destroy all spawned objects
         foreach (GameObject obj in spawnedObjects)
@@ -163,7 +163,7 @@ public class LevelManager : MonoBehaviour
     
     public void RestartLevel()
     {
-        LoadLevel(currentLevel);
+        GenrateLevel(currentLevel);
     }
 
     public void LoadNext()
@@ -185,17 +185,20 @@ public class LevelManager : MonoBehaviour
     private IEnumerator DelayLoadNext(LevelData nextLevel) // FOR TESTING
     {
         yield return new WaitForSeconds(2f);
-        LoadLevel(nextLevel);   
+        GenrateLevel(nextLevel);   
     }
 
-    
     public void LoadNextLevel(LevelData nextLevel)
     {
-        LoadLevel(nextLevel);
-        
+        GenrateLevel(nextLevel);
     }
-    
 
+    public void LoadLevel(int level)
+    {
+        currentLevelIndex = level;
+        currentLevel = allLevels.levels[level-1];
+        GenrateLevel(currentLevel);
+    }
     
     // Helper methods for getting references
     public GameObject GetLightSource()

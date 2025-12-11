@@ -1,8 +1,7 @@
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class GameUI : MonoBehaviour
+public class GameplayUIController : MonoBehaviour
 {
     [Header("Buttons")]
     [SerializeField] private Button restartButton;
@@ -23,10 +22,8 @@ public class GameUI : MonoBehaviour
     void Awake()
     {
         restartButton.onClick.AddListener(() => uIManager.RestartLevel());
-
-        
     }
-    void LateUpdate()
+     void LateUpdate()
     {
         UpdateLevelText();
     }

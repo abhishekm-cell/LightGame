@@ -5,8 +5,8 @@ public class UIManager : MonoBehaviour
 {
     [Header("UI Panels")]
     [SerializeField] private LevelSelectPanelUIController levelSelectPanelUIController;
-    [SerializeField] private GameUI gameUI;
-    [SerializeField] private MainMenu mainMenu;
+    [SerializeField] private GameplayUIController gameUI;
+    [SerializeField] private MainMenuUIController mainMenu;
 
      private GameManager gameManager;
     public void SetReferece(GameManager gameManager)
@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
         mainMenu.SetRefrence(this);
     }
 
+    void OnEnable()
+    {
+        ActivateMainMenu();
+    }
     public void RestartLevel()
     {
         gameManager.GetLevelManager().RestartLevel();
@@ -25,11 +29,24 @@ public class UIManager : MonoBehaviour
 
     public void LoadLevel(int level)
     {
-        
+        gameManager.GetLevelManager().LoadLevel(level);
+        ActivateGameplayUI();
     }
 
     public List<LevelDataSave> GetLevelData()
     {
         return gameManager.GetLevelDataManager().levelSaveDataList.levelDataSave;
+    }
+
+    public void ActivateMainMenu()
+    {
+        mainMenu.gameObject.SetActive(true);
+        gameUI.gameObject.SetActive(false);
+    }
+
+    public void ActivateGameplayUI()
+    {
+        mainMenu.gameObject.SetActive(false);
+        gameUI.gameObject.SetActive(true);
     }
 }
