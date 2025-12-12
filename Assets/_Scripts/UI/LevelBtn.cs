@@ -27,7 +27,7 @@ public class LevelBtn : MonoBehaviour
     private void Awake()
     {
         levelLoadbtn.onClick.AddListener(()=>{
-            levelSelectPanelUIController.LoadLevel(levelData.level);
+            levelSelectPanelUIController.StartGame(levelData.level);
         });
     }
     private void SetLock(bool locked)

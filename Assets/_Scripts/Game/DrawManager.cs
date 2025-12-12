@@ -19,6 +19,7 @@ public class DrawManager : MonoBehaviour
     
     public const float Resolution = 0.1f;
 
+    private bool isActive = false;
     private GameManager gameManager;    
 
     public void SetRefernce(GameManager gameManager)
@@ -40,7 +41,20 @@ public class DrawManager : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (!isActive) return;
         HandleDrawTouch();
+    }
+
+    public void OnGameStart()
+    {
+        isActive = true;
+        ClearAllLines();
+    }
+
+    public void OnGameWin()
+    {
+        isActive = false;
+        CalculateStart();
     }
 
     void HandleDrawTouch()
@@ -125,5 +139,18 @@ public class DrawManager : MonoBehaviour
     public bool TouchCheck()
     {
         return Input.touchCount > 0;
+    }
+    private void  CalculateStart()
+    {
+        float x =inkBar.minValue/inkBar.maxValue;
+        int star = 1;
+        if(x <= 0.4)
+        {
+            star = 3;
+        }else if (x <= 0.7f)
+        {
+            star = 2;
+        }
+        gameManager.GetLevelDataManager().SetStars(gameManager.GetLevelManager().currentLevelIndex, star);
     }
 }

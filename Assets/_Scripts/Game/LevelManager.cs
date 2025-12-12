@@ -95,11 +95,11 @@ public class LevelManager : MonoBehaviour
         
         platform.transform.localScale = new Vector3(platform.transform.localScale.x,1);
 
-        SpriteRenderer sr = platform.GetComponent<SpriteRenderer>();
-        if (sr != null)
-        {
-            sr.color = data.platformColor;
-        }
+        // SpriteRenderer sr = platform.GetComponent<SpriteRenderer>();
+        // if (sr != null)
+        // {
+        //     sr.color = data.platformColor;
+        // }
 
         
         spawnedObjects.Add(platform);
@@ -152,11 +152,6 @@ public class LevelManager : MonoBehaviour
         }
         spawnedObjects.Clear();
         
-        // Clear any drawn lines from previous level
-        if (gameManager.GetDrawManager() != null)
-        {
-            gameManager.GetDrawManager().ClearAllLines();
-        }
     }
 
     //drawmam = gameManager.GetDrawManager()

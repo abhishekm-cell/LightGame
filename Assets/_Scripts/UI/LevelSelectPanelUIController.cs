@@ -42,5 +42,5 @@ public class LevelSelectPanelUIController : MonoBehaviour
             levelButtonsList[i].SetConfig(this,levelsData[i]);
         }
     }
-    public void LoadLevel(int level)=>uIManager.LoadLevel(level);
+    public void StartGame(int level)=>uIManager.StartGame(level);
 }

@@ -41,12 +41,24 @@ public class GameManager : MonoBehaviour
         Game states = 1. Game in play ( no panels active) 2. game pause (panels active)
         loop should be between the above 2 states,  
     */
+    public void StartGame(int level)
+    {
+        levelManager.LoadLevel(level);
+        uiManager.ActivateGameplayUI();
+        drawManager.OnGameStart();
+    }
+    public void NextLevel()
+    {
+        levelManager.LoadNext();
+        drawManager.OnGameStart();
 
-
+    }
     public void SetGameOver()
     {
         gameOver = true;
         levelManager.RestartLevel();
+        uiManager.ActivateGameplayUI();
+        drawManager.OnGameStart();
         Debug.Log("Game over"); 
     }
 
@@ -61,8 +73,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("Level cleared now!!!!!!!!!!");
             target.transform.position = endpoint.transform.position;
             var endpointLight = endpoint.GetComponentInChildren<Light2D>();
-            endpointLight.intensity = 3f;   
-            levelManager.LoadNext();
+            endpointLight.intensity = 3f;  
+            levelDataManager.UnlockNextLevel(levelManager.currentLevelIndex); 
+            drawManager.OnGameWin();
+            uiManager.ActivateLevelCompletePanel();
         }
         else
         {

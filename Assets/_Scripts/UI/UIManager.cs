@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -27,10 +28,14 @@ public class UIManager : MonoBehaviour
     }
     public int GetCurrentLevelIndex()=> gameManager.GetLevelManager().currentLevelIndex;
 
-    public void LoadLevel(int level)
+    public void StartGame(int level)
     {
-        gameManager.GetLevelManager().LoadLevel(level);
-        ActivateGameplayUI();
+        gameManager.StartGame(level);
+    }
+
+    public void LoadNextLevel()
+    {
+        gameManager.NextLevel();
     }
 
     public List<LevelDataSave> GetLevelData()
@@ -48,5 +53,15 @@ public class UIManager : MonoBehaviour
     {
         mainMenu.gameObject.SetActive(false);
         gameUI.gameObject.SetActive(true);
+    }
+
+    public void ActivateLevelCompletePanel()
+    {
+        gameUI.ActivateLevelCompletePanel();
+    }
+
+    public int GetCurrentLevelStarts()
+    {
+        return gameManager.GetLevelDataManager().GetCurrentLevelData(gameManager.GetLevelManager().currentLevelIndex).stars;
     }
 }

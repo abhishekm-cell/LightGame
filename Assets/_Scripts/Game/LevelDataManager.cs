@@ -170,8 +170,10 @@ public class LevelDataManager
 
     }
 
-
-
+    public LevelDataSave GetCurrentLevelData(int level)
+    {
+        return levelSaveDataList.levelDataSave[level - 1];
+    }
     #endregion
 
 }

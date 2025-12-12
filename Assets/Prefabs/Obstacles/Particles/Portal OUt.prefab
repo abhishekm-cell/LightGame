@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 324251740542612722}
   - component: {fileID: 324251740542612723}
   - component: {fileID: 775533232623629585}
+  - component: {fileID: 5248857848622182551}
   m_Layer: 0
   m_Name: Portal OUt
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 86b305302181bf646b8e630e686d4c0f, type: 3}
-  m_Color: {r: 0.05281806, g: 1, b: 0, a: 0.29803923}
+  m_Color: {r: 0.05281806, g: 1, b: 0, a: 0.02745098}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -112,6 +113,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.3402052}
   m_EdgeRadius: 0
+--- !u!114 &5248857848622182551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324251740542612732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb632e7e9e010460ea488cdb138831a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childObj: {fileID: 1621509612586883123}
 --- !u!1 &1621509612586665225
 GameObject:
   m_ObjectHideFlags: 0
