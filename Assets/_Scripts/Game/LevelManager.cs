@@ -94,14 +94,7 @@ public class LevelManager : MonoBehaviour
         platform.transform.rotation = Quaternion.Euler(0, 0, data.targetRotation);
         
         platform.transform.localScale = new Vector3(platform.transform.localScale.x,1);
-
-        // SpriteRenderer sr = platform.GetComponent<SpriteRenderer>();
-        // if (sr != null)
-        // {
-        //     sr.color = data.platformColor;
-        // }
-
-        
+    
         spawnedObjects.Add(platform);
     }
 
@@ -120,29 +113,13 @@ public class LevelManager : MonoBehaviour
             portalScript.SetOutPortal(obstacle);
             portalScript = null;
         }
-        
-        // Setup specific obstacle types based on their components
-        // switch (data.type)
-        // {
-        //     case ObstacleType.RotationPortal:
-        //         break;
-        //     case ObstacleType.BlackHole:
-        //         break;
-        //     case ObstacleType.SpringPad:
-        //         break;
-        //     case ObstacleType.SpeedBoost:
-        //         break;
-        //     case ObstacleType.PortalIn:
-        //         break;
-        //     case ObstacleType.PortalOut:
-        //         break;
-        //}
+
         Debug.Log("Obstacle Data Type = " + data.type + " (int = " + (int)data.type + ")");
         
         spawnedObjects.Add(obstacle);
     }
     
-    private void ClearLevel()
+    public void ClearLevel() //Change to private if bug not fixed
     {
         // Destroy all spawned objects
         foreach (GameObject obj in spawnedObjects)
@@ -151,7 +128,6 @@ public class LevelManager : MonoBehaviour
                 Destroy(obj);
         }
         spawnedObjects.Clear();
-        
     }
 
     //drawmam = gameManager.GetDrawManager()
@@ -176,10 +152,12 @@ public class LevelManager : MonoBehaviour
         // LoadLevel(currentLevel);
         StartCoroutine(DelayLoadNext(currentLevel));// for TESTING
         gameManager.levelCleared = false;
+
     }
     private IEnumerator DelayLoadNext(LevelData nextLevel) // FOR TESTING
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
+        Debug.Log("DelayLoadNext");
         GenrateLevel(nextLevel);   
     }
 

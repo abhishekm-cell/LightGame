@@ -22,9 +22,10 @@ public class UIManager : MonoBehaviour
     {
         ActivateMainMenu();
     }
-    public void RestartLevel()
+    public void RestartLevel() // restart level during gameplay
     {
-        gameManager.GetLevelManager().RestartLevel();
+        gameManager.SetGameOver();
+        
     }
     public int GetCurrentLevelIndex()=> gameManager.GetLevelManager().currentLevelIndex;
 
@@ -47,21 +48,19 @@ public class UIManager : MonoBehaviour
     {
         mainMenu.gameObject.SetActive(true);
         gameUI.gameObject.SetActive(false);
+        gameManager.ClearGamePLay();
     }
 
     public void ActivateGameplayUI()
     {
         mainMenu.gameObject.SetActive(false);
         gameUI.gameObject.SetActive(true);
+        gameUI.DeactivateLevelCompletePanel();
     }
 
-    public void ActivateLevelCompletePanel()
+    public void ActivateLevelCompletePanel( int stars)
     {
-        gameUI.ActivateLevelCompletePanel();
+        gameUI.ActivateLevelCompletePanel(stars);
     }
 
-    public int GetCurrentLevelStarts()
-    {
-        return gameManager.GetLevelDataManager().GetCurrentLevelData(gameManager.GetLevelManager().currentLevelIndex).stars;
-    }
 }

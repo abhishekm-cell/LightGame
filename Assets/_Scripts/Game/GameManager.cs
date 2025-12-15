@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LevelManager levelManager;
     [SerializeField] private LevelDataManager levelDataManager;
     [SerializeField] private UIManager uiManager;
-    public bool gameOver { get; private set; }
     public bool gamestarted = false;  
     public bool levelCleared = false;
     private bool onLastLevel = false;
@@ -32,34 +31,34 @@ public class GameManager : MonoBehaviour
         //loading data
         levelDataManager.LoadData();
     }
-
-    /*
-        Game will start / be inplay when there are no ui panels active, if panels are active game will be in pause state
-
-
-
-        Game states = 1. Game in play ( no panels active) 2. game pause (panels active)
-        loop should be between the above 2 states,  
-    */
     public void StartGame(int level)
     {
         levelManager.LoadLevel(level);
         uiManager.ActivateGameplayUI();
         drawManager.OnGameStart();
+        levelCleared = false;
     }
     public void NextLevel()
     {
         levelManager.LoadNext();
         drawManager.OnGameStart();
-
+        levelCleared = false;
     }
     public void SetGameOver()
     {
-        gameOver = true;
+        drawManager.OnGameStart();
         levelManager.RestartLevel();
         uiManager.ActivateGameplayUI();
-        drawManager.OnGameStart();
+        levelCleared = false;
         Debug.Log("Game over"); 
+    }
+
+    public void ClearGamePLay()
+    {
+        drawManager.SetActive(false);
+        drawManager.ClearAllLines();
+        levelManager.ClearLevel();
+        levelCleared = false;
     }
 
     public void LevelClearCheck()
@@ -76,7 +75,7 @@ public class GameManager : MonoBehaviour
             endpointLight.intensity = 3f;  
             levelDataManager.UnlockNextLevel(levelManager.currentLevelIndex); 
             drawManager.OnGameWin();
-            uiManager.ActivateLevelCompletePanel();
+            levelManager.ClearLevel();
         }
         else
         {
@@ -102,4 +101,5 @@ public class GameManager : MonoBehaviour
     public DrawManager GetDrawManager()=>drawManager;
     public LevelDataManager GetLevelDataManager()=>levelDataManager;
     public BlackHole GetBlackHole()=>blackHole;
+    public UIManager GetUIManager()=>uiManager;
 }

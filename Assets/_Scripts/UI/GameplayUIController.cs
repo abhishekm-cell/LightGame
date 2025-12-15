@@ -21,6 +21,7 @@ public class GameplayUIController : MonoBehaviour
     }
     void Awake()
     {
+        homeButton.onClick.AddListener(() => uIManager.ActivateMainMenu());
         restartButton.onClick.AddListener(() => uIManager.RestartLevel());
         levelCompleteUIController.gameObject.SetActive(false);
     }
@@ -47,10 +48,15 @@ public class GameplayUIController : MonoBehaviour
         levelText.text = "Level " + uIManager.GetCurrentLevelIndex();
     }
 
-    public void ActivateLevelCompletePanel()
+    public void ActivateLevelCompletePanel(int stars)
     {
+        
         levelCompleteUIController.gameObject.SetActive(true);
-        int start = uIManager.GetCurrentLevelStarts();
-        levelCompleteUIController.SetStart(start);
+        levelCompleteUIController.SetStart(stars);
+    }
+
+    public void DeactivateLevelCompletePanel()
+    {
+        levelCompleteUIController.gameObject.SetActive(false);
     }
 }

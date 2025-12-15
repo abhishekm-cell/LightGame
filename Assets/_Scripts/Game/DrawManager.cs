@@ -54,7 +54,8 @@ public class DrawManager : MonoBehaviour
     public void OnGameWin()
     {
         isActive = false;
-        CalculateStart();
+        CalculateStars();
+        ClearAllLines();
     }
 
     void HandleDrawTouch()
@@ -140,17 +141,34 @@ public class DrawManager : MonoBehaviour
     {
         return Input.touchCount > 0;
     }
-    private void  CalculateStart()
+    private void CalculateStars()
+{
+    float inkPercentUsed = inkUsed / inkLimit;
+    Debug.Log("Ink used %: " + inkPercentUsed);
+
+    int stars;
+
+    if (inkPercentUsed <= 0.4f)
     {
-        float x =inkBar.minValue/inkBar.maxValue;
-        int star = 1;
-        if(x <= 0.4)
-        {
-            star = 3;
-        }else if (x <= 0.7f)
-        {
-            star = 2;
-        }
-        gameManager.GetLevelDataManager().SetStars(gameManager.GetLevelManager().currentLevelIndex, star);
+        stars = 3; 
+    }
+    else if (inkPercentUsed <= 0.7f)
+    {
+        stars = 2; // okay
+    }
+    else
+    {
+        stars = 1; // sloppy
+    }
+
+    gameManager
+        .GetLevelDataManager()
+        .SetStars(gameManager.GetLevelManager().currentLevelIndex, stars);
+    gameManager.GetUIManager().ActivateLevelCompletePanel(stars);
+}
+
+    public void SetActive(bool active)
+    {
+        isActive = active;
     }
 }

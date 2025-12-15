@@ -1,11 +1,7 @@
 using System;
-
 using System.Collections.Generic;
-
 using UnityEngine;
-
 public class LevelDataManager 
-
 {
 
     private const string SAVE_KEY = "LEVEL_DATA_SAVE";

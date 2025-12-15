@@ -29,7 +29,7 @@ public class LevelCompleteUIController : MonoBehaviour
         });
         homeBtn.onClick.AddListener(() =>
         {
-            uIManager.ActivateMainMenu();
+            uIManager.ActivateMainMenu();   
         });
         nextLevelBtn.onClick.AddListener(() =>
         {
