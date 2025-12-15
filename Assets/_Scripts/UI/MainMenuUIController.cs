@@ -5,6 +5,8 @@ public class MainMenuUIController : MonoBehaviour
 {
     [SerializeField] private Button levelSelectBtn;
     [SerializeField] private Button closeLevelSelectBtn;
+    [SerializeField] private Button musicOnBtn;
+    [SerializeField] private Button musicOffBtn;
     [SerializeField] private LevelSelectPanelUIController levelSelectPanelUIController;
     private UIManager uIManager;
     public void SetRefrence(UIManager uIManager)
@@ -32,5 +34,15 @@ public class MainMenuUIController : MonoBehaviour
     private void OnDisable()
     {
         levelSelectPanelUIController.gameObject.SetActive(false);
+    }
+
+    private void MusicOn()
+    {
+        
+    }
+
+    private void MusicOff()
+    {
+        
     }
 }

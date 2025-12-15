@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -67,15 +68,15 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-        if (target != null)
+        if (target != null && target.transform.position == endpoint.transform.position)
         {
             Debug.Log("Level cleared now!!!!!!!!!!");
             target.transform.position = endpoint.transform.position;
-            var endpointLight = endpoint.GetComponentInChildren<Light2D>();
-            endpointLight.intensity = 3f;  
+            levelManager.LightActivate();
             levelDataManager.UnlockNextLevel(levelManager.currentLevelIndex); 
-            drawManager.OnGameWin();
-            levelManager.ClearLevel();
+            StartCoroutine(DelayPanelLoad());
+            // drawManager.OnGameWin();
+            // levelManager.ClearLevel();
         }
         else
         {
@@ -84,7 +85,13 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("Target is null! Was it destroyed or not spawned yet?");
         }
     }
-
+    private IEnumerator DelayPanelLoad()
+    {
+        yield return new WaitForSeconds(1.5f);
+        drawManager.OnGameWin();
+        levelManager.ClearLevel();
+    }
+    
     public void OnLastLevel()
     {
         onLastLevel = true;

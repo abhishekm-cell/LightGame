@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 public class LevelManager : MonoBehaviour
 {
@@ -82,6 +83,10 @@ public class LevelManager : MonoBehaviour
         }
         
     }
+    public void LightActivate()
+    {
+        endPointInstance.GetComponentInChildren<Light2D>().intensity = 3f;
+    }
     
     void CreatePlatform(PlatformData data)
     {
@@ -156,7 +161,7 @@ public class LevelManager : MonoBehaviour
     }
     private IEnumerator DelayLoadNext(LevelData nextLevel) // FOR TESTING
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         Debug.Log("DelayLoadNext");
         GenrateLevel(nextLevel);   
     }

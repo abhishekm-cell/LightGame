@@ -16,3 +16,13 @@ public enum PlatformType
     RotatingPlatform,
 }
 
+public enum SoundType
+{
+    BGMusic,
+    LineDraw,
+    LightSourceMove,
+    LevelClear,
+    ButtonClick,
+    
+}
+

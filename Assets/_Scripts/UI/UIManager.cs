@@ -1,5 +1,5 @@
+using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -62,5 +62,7 @@ public class UIManager : MonoBehaviour
     {
         gameUI.ActivateLevelCompletePanel(stars);
     }
+
+    
 
 }
