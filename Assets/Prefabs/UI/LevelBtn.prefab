@@ -382,6 +382,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 791675755823640915, guid: 9d857974540b147e9884b424efa1e4f6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 791675755823640915, guid: 9d857974540b147e9884b424efa1e4f6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 791675755823640915, guid: 9d857974540b147e9884b424efa1e4f6, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -396,6 +404,14 @@ PrefabInstance:
     - target: {fileID: 2380279589947924011, guid: 9d857974540b147e9884b424efa1e4f6, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2380279589947924011, guid: 9d857974540b147e9884b424efa1e4f6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2380279589947924011, guid: 9d857974540b147e9884b424efa1e4f6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2380279589947924011, guid: 9d857974540b147e9884b424efa1e4f6, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -416,6 +432,14 @@ PrefabInstance:
     - target: {fileID: 2781878628288878264, guid: 9d857974540b147e9884b424efa1e4f6, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781878628288878264, guid: 9d857974540b147e9884b424efa1e4f6, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781878628288878264, guid: 9d857974540b147e9884b424efa1e4f6, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2781878628288878264, guid: 9d857974540b147e9884b424efa1e4f6, type: 3}
       propertyPath: m_AnchoredPosition.x
