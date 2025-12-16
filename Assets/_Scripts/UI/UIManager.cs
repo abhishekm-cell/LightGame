@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
     public void RestartLevel() // restart level during gameplay
     {
         gameManager.SetGameOver();
-        
+        AudioManager.Instance.StopSfx();
     }
     public int GetCurrentLevelIndex()=> gameManager.GetLevelManager().currentLevelIndex;
 
