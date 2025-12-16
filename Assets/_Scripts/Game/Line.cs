@@ -15,28 +15,9 @@ public class Line : MonoBehaviour
     {
         _collider.transform.position -= transform.position;
     }
-
-    // public void SetPosition(Vector2 pos)
-    // {
-        
-    //     if (rawPoints.Count == 0)
-    //     {
-    //         rawPoints.Add(pos);
-    //         UpdateLine();
-    //         return;
-    //     }
-
-        
-    //     if (Vector2.Distance(rawPoints[rawPoints.Count - 1], pos) < DrawManager.Resolution)
-    //         return;
-
-    //     rawPoints.Add(pos);
-    //     UpdateLine();
-    // }
-
     
 
-    public void SetPosition(Vector2 pos)
+    public bool SetPosition(Vector2 pos)
     {
         if (rawPoints.Count > 0)
         {
@@ -47,8 +28,9 @@ public class Line : MonoBehaviour
 
             if (hit.collider != null)
             {
-                // Block drawing on obstacles
-                return;
+                rawPoints.Add(hit.point);
+                UpdateLine();
+                return false;
             }
         }
 
@@ -57,14 +39,15 @@ public class Line : MonoBehaviour
         {
             rawPoints.Add(pos);
             UpdateLine();
-            return;
+            return true;
         }
 
         if (Vector2.Distance(rawPoints[rawPoints.Count - 1], pos) < DrawManager.Resolution)
-            return;
+            return true;
 
         rawPoints.Add(pos);
         UpdateLine();
+        return true;
     }
 
 

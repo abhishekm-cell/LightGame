@@ -36,9 +36,7 @@ public class LevelDataManager
         }
 
 
-
         string json = PlayerPrefs.GetString(SAVE_KEY);
-
 
 
         try
@@ -65,7 +63,6 @@ public class LevelDataManager
 
 
     public void SaveData()
-
     {
 
         string json = JsonUtility.ToJson(levelSaveDataList, true);
@@ -79,7 +76,6 @@ public class LevelDataManager
 
 
     private void CreateDefaultData()
-
     {
 
         levelSaveDataList = new LevelDataSaveList();
@@ -119,7 +115,6 @@ public class LevelDataManager
 
 
     public void UnlockNextLevel(int currentLevel)
-
     {
 
         int index = currentLevel; // since 1-based level, 2 = index 1
@@ -143,7 +138,6 @@ public class LevelDataManager
 
 
     public void SetStars(int level, int stars)
-
     {
 
     
@@ -179,7 +173,6 @@ public class LevelDataManager
 [Serializable]
 
 public class LevelDataSaveList
-
 {
 
     public List<LevelDataSave> levelDataSave;

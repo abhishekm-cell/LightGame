@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.UI;
 
 public class DrawManager : MonoBehaviour
@@ -94,7 +93,11 @@ public class DrawManager : MonoBehaviour
                         
                         Vector2 finalPoint = lastPoint + (touchPos - lastPoint).normalized * allowed;
 
-                        _currentLine.SetPosition(finalPoint);
+                        if(!_currentLine.SetPosition(finalPoint))
+                        {
+                            _currentLine = null;
+                            return;
+                        }
                         inkUsed = inkLimit; 
                         UpdateInkUI();
 
@@ -106,7 +109,11 @@ public class DrawManager : MonoBehaviour
                     inkUsed += distance;
                     lastPoint = touchPos;
 
-                    _currentLine.SetPosition(touchPos);
+                    if(!_currentLine.SetPosition(touchPos))
+                    {
+                        _currentLine = null;
+                        return;    
+                    }
                     UpdateInkUI();
                 }
             }

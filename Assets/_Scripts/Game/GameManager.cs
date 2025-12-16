@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
         levelDataManager.SetReferece(this);
         uiManager.SetReferece(this);
         drawManager.SetRefernce(this);
+        
         //loading data
         levelDataManager.LoadData();
     }
