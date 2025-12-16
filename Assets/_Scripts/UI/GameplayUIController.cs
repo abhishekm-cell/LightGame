@@ -56,11 +56,15 @@ public class GameplayUIController : MonoBehaviour
         levelText.text = "Level " + uIManager.GetCurrentLevelIndex();
     }
 
-    public void ActivateLevelCompletePanel(int stars)
+    public void ActivateLevelCompletePanel(int stars, bool isLastLevel)
     {
         
         levelCompleteUIController.gameObject.SetActive(true);
         levelCompleteUIController.SetStart(stars);
+        if(isLastLevel)
+        {
+            levelCompleteUIController.DeactivateNextBtn();
+        }
     }
 
     public void DeactivateLevelCompletePanel()

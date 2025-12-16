@@ -9,7 +9,9 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private Button musicOffBtn;
     [SerializeField] private Button gameInfoBtn;
     [SerializeField] private Button closeInfoBtn;
+    [SerializeField] private Button exitBtn;
     [SerializeField] private GameObject infoPanel;
+    [SerializeField] private GameObject musicIconOn,musicIconOff;
     [SerializeField] private LevelSelectPanelUIController levelSelectPanelUIController;
     private UIManager uIManager;
     public void SetRefrence(UIManager uIManager)
@@ -42,6 +44,11 @@ public class MainMenuUIController : MonoBehaviour
             AudioManager.Instance.PlaySFX(SoundType.ButtonClick);
         });
 
+        musicOnBtn.onClick.AddListener(MusicOn);
+        musicOffBtn.onClick.AddListener(MusicOff);
+
+        exitBtn.onClick.AddListener(OnQuit);
+
     }
     private void OnEnable()
     {
@@ -57,11 +64,21 @@ public class MainMenuUIController : MonoBehaviour
 
     private void MusicOn()
     {
-        
+        Debug.Log("Music on");
+        AudioManager.Instance.SetMusic(false);
+        musicIconOff.SetActive(true);
+        musicIconOn.SetActive(false);
     }
 
     private void MusicOff()
     {
-        
+        Debug.Log("Music off");
+        AudioManager.Instance.SetMusic(true);
+        musicIconOn.SetActive(true);
+        musicIconOff.SetActive(false);
+    }
+    private void OnQuit()
+    {
+        Application.Quit();
     }
 }

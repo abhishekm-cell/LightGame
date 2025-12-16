@@ -40,11 +40,19 @@ public class LevelCompleteUIController : MonoBehaviour
             AudioManager.Instance.PlaySFX(SoundType.ButtonClick);
         });
     }
+    void OnEnable()
+    {
+        nextLevelBtn.gameObject.SetActive(true);
+    }
 
     public void SetStart(int starts)
     {
         star1.SetActive(starts >= 1);
         star2.SetActive(starts >= 2);
         star3.SetActive(starts >= 3);
+    }
+    public void DeactivateNextBtn()
+    {
+        nextLevelBtn.gameObject.SetActive(false);
     }
 }

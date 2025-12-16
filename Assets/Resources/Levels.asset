@@ -1085,7 +1085,7 @@ MonoBehaviour:
     startPoint: {fileID: 7039154512654999422, guid: 164bfe4bf2bae4ed2a92fdf81f58c944, type: 3}
     endPoint: {fileID: 6954521963217031438, guid: 4b76c3b95583f444cb8f999628fc5b4f, type: 3}
     startPointPosition: {x: -16, y: 6}
-    endPointPosition: {x: 14, y: 6}
+    endPointPosition: {x: -12, y: -1}
     platforms:
     - type: 0
       spawnPoint: {x: -11.7, y: 2.3}

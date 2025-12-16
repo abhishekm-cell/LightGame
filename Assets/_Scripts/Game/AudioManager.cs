@@ -4,8 +4,11 @@ using System;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
+
     public Sound[] musicSounds, sfxSounds;
-    [SerializeField] AudioSource musicSource, sfxSource;
+    [SerializeField] private AudioSource musicSource, sfxSource;
+
+    public bool IsMusicOn { get; private set; } = true;
 
     private void Awake()
     {
@@ -17,21 +20,39 @@ public class AudioManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         PlayMusic(SoundType.BGMusic);
     }
+
     public void PlayMusic(SoundType soundType)
     {
+        if (!IsMusicOn) return;
+
         Sound s = Array.Find(musicSounds, x => x.soundType == soundType);
         if (s == null)
         {
-            Debug.Log("Sound not found");
+            Debug.Log("Music not found");
+            return;
+        }
+
+        musicSource.clip = s.clip;
+        musicSource.loop = true;
+        musicSource.Play();
+    }
+
+    public void SetMusic(bool on)
+    {
+        IsMusicOn = on;
+
+        if (on)
+        {
+            musicSource.UnPause();
         }
         else
         {
-            musicSource.clip = s.clip;
-            musicSource.Play();
+            musicSource.Pause();
         }
     }
 
@@ -41,13 +62,14 @@ public class AudioManager : MonoBehaviour
         if (s == null)
         {
             Debug.Log("SFX not Found");
+            return;
         }
-        else
-        {
-            sfxSource.PlayOneShot(s.clip);
-        }
+
+        sfxSource.PlayOneShot(s.clip);
     }
 }
+
+
     [Serializable]
     public class Sound 
     {

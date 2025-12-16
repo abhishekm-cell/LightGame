@@ -60,7 +60,8 @@ public class UIManager : MonoBehaviour
 
     public void ActivateLevelCompletePanel( int stars)
     {
-        gameUI.ActivateLevelCompletePanel(stars);
+        bool isLastLevel = gameManager.GetLevelManager().currentLevelIndex == gameManager.GetLevelDataManager().totalLevels;
+        gameUI.ActivateLevelCompletePanel(stars, isLastLevel);
     }
 
     
