@@ -68,13 +68,15 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-        if (target != null && target.transform.position == endpoint.transform.position)
+        if (target != null && levelCleared && target.transform.position == endpoint.transform.position)
         {
             Debug.Log("Level cleared now!!!!!!!!!!");
             target.transform.position = endpoint.transform.position;
             levelManager.LightActivate();
             levelDataManager.UnlockNextLevel(levelManager.currentLevelIndex); 
+            AudioManager.Instance.PlaySFX(SoundType.LevelClear);
             StartCoroutine(DelayPanelLoad());
+            levelCleared = false;
             // drawManager.OnGameWin();
             // levelManager.ClearLevel();
         }

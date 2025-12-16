@@ -47,17 +47,18 @@ public class LightSource : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("EndPoint")) //LayerMask.NameToLayer("EndPoint")
+        if (collision.gameObject.layer == LayerMask.NameToLayer("EndPoint") && !gameManager.levelCleared) //LayerMask.NameToLayer("EndPoint")
         {
             gameManager.levelCleared = true;
             transform.position = collision.transform.position;
             rb.constraints = RigidbodyConstraints2D.FreezePosition;
+            Debug.Log("Level cleared");
         }
 
         if(collision.gameObject.layer == LayerMask.NameToLayer("SpeedBoost"))
         {
             Debug.Log("speed boost");
-
+            AudioManager.Instance.PlaySFX(SoundType.SpeedBoost);
             rb.velocity *= speedBoost;
         }
        

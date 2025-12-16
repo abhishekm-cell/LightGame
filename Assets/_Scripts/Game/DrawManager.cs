@@ -65,7 +65,7 @@ public class DrawManager : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             Vector2 touchPos = cam.ScreenToWorldPoint(touch.position);
 
-            // === START DRAW ===
+            
             if (touch.phase == TouchPhase.Began)
             {
                 
@@ -73,11 +73,10 @@ public class DrawManager : MonoBehaviour
 
                 _currentLine = Instantiate(linePrefab, touchPos, Quaternion.identity);
                 drawnLines.Add(_currentLine);
-
                 lastPoint = touchPos; 
             }
 
-            // === CONTINUE DRAWING ===
+         
             else if (touch.phase == TouchPhase.Moved)
             {
                 if (_currentLine == null) return;
@@ -144,7 +143,7 @@ public class DrawManager : MonoBehaviour
     private void CalculateStars()
 {
     float inkPercentUsed = inkUsed / inkLimit;
-    Debug.Log("Ink used %: " + inkPercentUsed);
+    Debug.Log("Ink percent used: " + inkPercentUsed);
 
     int stars;
 
@@ -154,11 +153,11 @@ public class DrawManager : MonoBehaviour
     }
     else if (inkPercentUsed <= 0.7f)
     {
-        stars = 2; // okay
+        stars = 2; 
     }
     else
     {
-        stars = 1; // sloppy
+        stars = 1; 
     }
 
     gameManager

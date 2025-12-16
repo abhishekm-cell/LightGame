@@ -26,6 +26,7 @@ public class BlackHole : MonoBehaviour
                 targetRb.velocity = Vector2.zero; 
             }
             isMovingToCentre = true;
+            AudioManager.Instance.PlaySFX(SoundType.BlackHole);
             StartCoroutine(DelayGameOver());
         }
     }

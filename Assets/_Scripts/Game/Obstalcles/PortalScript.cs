@@ -35,6 +35,7 @@ public class PortalScript : MonoBehaviour
         
         contactLocalPos = transform.InverseTransformPoint(obj.transform.position);
 
+        AudioManager.Instance.PlaySFX(SoundType.PortalIn);
         
         TeleportToExit(obj, rb);
     }
@@ -55,6 +56,8 @@ public class PortalScript : MonoBehaviour
 
         // Preserve velocity
         rb.velocity = savedVelocity * velocityMultiplier;
+
+        AudioManager.Instance.PlaySFX(SoundType.PortalOut);
     }
 
 

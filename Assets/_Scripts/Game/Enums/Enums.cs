@@ -23,6 +23,11 @@ public enum SoundType
     LightSourceMove,
     LevelClear,
     ButtonClick,
+    SpringJump,
+    PortalIn,
+    PortalOut,
+    BlackHole,
+    SpeedBoost,
     
 }
 

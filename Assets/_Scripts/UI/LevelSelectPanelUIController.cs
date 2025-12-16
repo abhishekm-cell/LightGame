@@ -22,6 +22,7 @@ public class LevelSelectPanelUIController : MonoBehaviour
     {
         closeBtn.onClick.AddListener(() =>{ 
             gameObject.SetActive(false);
+            AudioManager.Instance.PlaySFX(SoundType.ButtonClick);
         });
     }
     void Start()

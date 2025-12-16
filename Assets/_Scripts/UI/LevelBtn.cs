@@ -19,7 +19,6 @@ public class LevelBtn : MonoBehaviour
     {
         this.levelSelectPanelUIController = levelSelectPanelUIController;
         this.levelData = levelData;
-        Debug.Log(levelData.level + " " + levelData.isUnlocked + " " + levelData.stars);
         SetLock(!levelData.isUnlocked);
         SetStart(levelData.stars);
         UpdateLevelText();
@@ -28,6 +27,7 @@ public class LevelBtn : MonoBehaviour
     {
         levelLoadbtn.onClick.AddListener(()=>{
             levelSelectPanelUIController.StartGame(levelData.level);
+            AudioManager.Instance.PlaySFX(SoundType.ButtonClick);
         });
     }
     private void SetLock(bool locked)

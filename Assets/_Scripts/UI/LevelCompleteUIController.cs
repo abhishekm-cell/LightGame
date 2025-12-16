@@ -26,15 +26,18 @@ public class LevelCompleteUIController : MonoBehaviour
         {
             uIManager.RestartLevel();
             gameObject.SetActive(false);
+            AudioManager.Instance.PlaySFX(SoundType.ButtonClick);
         });
         homeBtn.onClick.AddListener(() =>
         {
-            uIManager.ActivateMainMenu();   
+            uIManager.ActivateMainMenu(); 
+            AudioManager.Instance.PlaySFX(SoundType.ButtonClick);  
         });
         nextLevelBtn.onClick.AddListener(() =>
         {
             uIManager.LoadNextLevel();
             gameObject.SetActive(false);
+            AudioManager.Instance.PlaySFX(SoundType.ButtonClick);
         });
     }
 

@@ -124,12 +124,10 @@ public class LevelDataManager
 
         int index = currentLevel; // since 1-based level, 2 = index 1
 
-        Debug.Log("Unlocking level " + index+ "level"+ currentLevel);
-
         if (index < levelSaveDataList.levelDataSave.Count)
 
         {
-
+            Debug.Log("Unlocking next level");
             var l = levelSaveDataList.levelDataSave[index];
 
             l.isUnlocked = true;
@@ -148,11 +146,11 @@ public class LevelDataManager
 
     {
 
-        Debug.Log("Setting stars for level " + level + " to " + stars);
+    
 
         int index = level - 1;
 
-
+        Debug.Log("Setting stars for level " + level + " to " + stars);
 
         var l = levelSaveDataList.levelDataSave[index];
 

@@ -40,7 +40,6 @@ public class PlatformData
     public Vector2 spawnPoint;
     public float targetRotation;
     public float thickness = 0.2f;
-    //public Color platformColor = Color.grey;
 }
 
 

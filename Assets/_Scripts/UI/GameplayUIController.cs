@@ -21,8 +21,16 @@ public class GameplayUIController : MonoBehaviour
     }
     void Awake()
     {
-        homeButton.onClick.AddListener(() => uIManager.ActivateMainMenu());
-        restartButton.onClick.AddListener(() => uIManager.RestartLevel());
+        homeButton.onClick.AddListener(() =>
+        {
+            uIManager.ActivateMainMenu();
+            AudioManager.Instance.PlaySFX(SoundType.ButtonClick);
+        });
+        restartButton.onClick.AddListener(() => 
+        {
+            uIManager.RestartLevel();
+            AudioManager.Instance.PlaySFX(SoundType.ButtonClick);
+        });
         levelCompleteUIController.gameObject.SetActive(false);
     }
 
